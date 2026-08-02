@@ -1,60 +1,1208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amin Hosseinniya</title>
+<title>Amin Hosseinniya — Data Scientist & ML Engineer</title>
+<meta name="description" content="Data Scientist and ML Engineer. I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<meta name="theme-color" content="#08181F">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aminhosseinniya.com/">
+<meta property="og:title" content="Amin Hosseinniya — Data Scientist & ML Engineer">
+<meta property="og:description" content="I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<meta property="og:image" content="https://aminhosseinniya.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Amin Hosseinniya — Data Scientist & ML Engineer">
+<meta name="twitter:description" content="I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<meta name="twitter:image" content="https://aminhosseinniya.com/assets/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
-    background: #f7f9f9;
-    color: #1F4E5F;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-  }
-  .container { max-width: 480px; }
-  h1 {
-    font-size: 2rem;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-  p.role {
-    font-size: 1rem;
-    color: #4a6b76;
-    margin-bottom: 32px;
-  }
-  p.note {
-    font-size: 0.95rem;
-    color: #6b8891;
-    margin-bottom: 28px;
-    line-height: 1.5;
-  }
-  .links a {
-    color: #1F4E5F;
-    text-decoration: none;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #1F4E5F;
-    padding-bottom: 2px;
-    margin: 0 10px;
-  }
-  .links a:hover { opacity: 0.7; }
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+:root[data-theme="dark"]{
+  --bg:#08181F;
+  --bg-2:#0D2129;
+  --bg-3:#112B35;
+  --line:#1C3E4A;
+  --line-2:#2A5A6B;
+  --text:#E8F1F3;
+  --text-2:#9BB4BE;
+  --text-3:#6E8B97;
+  --accent:#4FB3CE;
+  --accent-2:#2C7D93;
+  --accent-glow:rgba(79,179,206,.35);
+  --brass:#D4A93C;
+  --shadow:0 10px 40px rgba(0,0,0,.45);
+  --graph-op:.5;
+  --scrim:rgba(8,24,31,.74);
+}
+:root[data-theme="light"]{
+  --bg:#F4F8F9;
+  --bg-2:#FFFFFF;
+  --bg-3:#FFFFFF;
+  --line:#DCE7EB;
+  --line-2:#BACED6;
+  --text:#0C232C;
+  --text-2:#54707B;
+  --text-3:#7B959F;
+  --accent:#1F4E5F;
+  --accent-2:#3D7E92;
+  --accent-glow:rgba(31,78,95,.22);
+  --brass:#A8802C;
+  --shadow:0 10px 34px rgba(15,42,51,.10);
+  --graph-op:.5;
+  --scrim:rgba(244,248,249,.76);
+}
+:root{
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Newsreader',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --measure:66ch;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);font-size:19px;line-height:1.66;
+  color:var(--text);background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+a{color:var(--accent);text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:3px}
+
+.skip{position:absolute;left:-9999px;background:var(--accent);color:var(--bg);padding:12px 18px;z-index:200}
+.skip:focus{left:12px;top:12px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+/* ============================================================
+   FIXED GRAPH BACKGROUND
+   ============================================================ */
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-blur{
+  position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);
+  filter:blur(2.2px);opacity:var(--graph-op);
+  transition:opacity .45s var(--ease)
+}
+.bg-scrim{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 72% 58% at 50% 42%, var(--scrim) 0%, transparent 78%),
+    linear-gradient(to bottom, transparent 0%, var(--scrim) 52%, var(--scrim) 100%);
+}
+.bg-chain{position:absolute;left:0;top:0;height:100%;width:340px;opacity:.9}
+@media(max-width:1180px){.bg-chain{display:none}}
+
+.chain-edge{stroke:var(--line-2);stroke-width:1.2;fill:none;transition:stroke .5s var(--ease)}
+.chain-edge.lit{stroke:var(--accent-2)}
+.chain-node{fill:var(--bg);stroke:var(--line-2);stroke-width:1.5;transition:all .55s var(--ease)}
+.chain-node.active{fill:var(--accent);stroke:var(--accent);filter:drop-shadow(0 0 9px var(--accent-glow))}
+.chain-halo{fill:none;stroke:var(--accent);stroke-width:1.2;opacity:0;transform-box:fill-box;transform-origin:center}
+.chain-node.active + .chain-halo{animation:halo 2.6s var(--ease) infinite}
+@keyframes halo{
+  0%{opacity:.55;transform:scale(1)}
+  70%{opacity:0;transform:scale(2.4)}
+  100%{opacity:0;transform:scale(2.4)}
+}
+.chain-label{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  fill:var(--text-3);opacity:0;transition:opacity .5s var(--ease),fill .5s var(--ease)
+}
+.chain-label.active{opacity:1;fill:var(--accent)}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid var(--line);
+  transition:background .45s var(--ease),border-color .45s var(--ease)
+}
+.topbar-inner{display:flex;align-items:center;gap:18px;height:62px}
+.mark{
+  font-family:var(--mono);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text);white-space:nowrap;flex-shrink:0
+}
+.mark b{color:var(--accent);font-weight:500}
+.mark{transition:opacity .3s var(--ease)}
+.mark:hover{opacity:.72}
+a.case-org{border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
+a.case-org:hover{border-bottom-color:var(--accent)}
+.roles a,.edu a,.prose a.plain{color:inherit;border-bottom:1px solid color-mix(in srgb, var(--accent) 40%, transparent);transition:color .3s var(--ease),border-color .3s var(--ease)}
+.roles a:hover,.edu a:hover,.prose a.plain:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+.topnav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{
+  position:relative;font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--text-3);padding:9px 13px;border-radius:3px;
+  white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease)
+}
+.topnav a::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:3px;height:1.5px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .38s var(--ease)
+}
+.topnav a:hover{color:var(--text-2)}
+.topnav a.active{color:var(--accent);background:color-mix(in srgb, var(--accent) 10%, transparent)}
+.topnav a.active::after{transform:scaleX(1)}
+
+.theme-btn{
+  flex-shrink:0;display:grid;place-items:center;width:34px;height:34px;cursor:pointer;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:4px;color:var(--text-2);
+  transition:color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)
+}
+.theme-btn:hover{color:var(--accent);border-color:var(--accent-2);transform:translateY(-1px)}
+.theme-btn svg{width:16px;height:16px}
+:root[data-theme="dark"] .icon-sun{display:block}
+:root[data-theme="dark"] .icon-moon{display:none}
+:root[data-theme="light"] .icon-sun{display:none}
+:root[data-theme="light"] .icon-moon{display:block}
+
+@media(max-width:900px){
+  .topbar-inner{height:auto;flex-wrap:wrap;padding-top:10px;gap:10px}
+  .mark{font-size:11.5px}
+  .topnav{order:3;width:100%;margin-left:0;padding:8px 0;border-top:1px solid var(--line)}
+  .theme-btn{margin-left:auto}
+}
+
+/* ============================================================
+   SHELL
+   ============================================================ */
+.wrap{max-width:1120px;margin:0 auto;padding:0 30px;position:relative;z-index:2}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;z-index:2;border-bottom:1px solid var(--line)}
+.hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:end;padding-top:84px}
+.hero-copy{padding-bottom:88px}
+.eyebrow{
+  display:flex;align-items:center;gap:11px;margin-bottom:22px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)
+}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--accent-2)}
+h1{
+  font-family:var(--display);font-weight:600;letter-spacing:-.03em;
+  font-size:clamp(2.7rem,6.4vw,4.5rem);line-height:1;color:var(--text)
+}
+.role{
+  display:inline-block;margin-top:20px;padding-bottom:24px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:13px;letter-spacing:.05em;color:var(--text-3)
+}
+.lede{
+  margin-top:28px;max-width:32ch;font-weight:300;color:var(--text);
+  font-size:clamp(1.16rem,2.2vw,1.44rem);line-height:1.48
+}
+.avail{
+  margin-top:28px;padding:14px 18px;border-left:2px solid var(--brass);
+  background:color-mix(in srgb, var(--brass) 9%, transparent);border-radius:0 4px 4px 0;
+  font-family:var(--mono);font-size:13px;line-height:1.85;color:var(--text-2)
+}
+.hero-links{display:flex;flex-wrap:wrap;gap:11px;margin-top:32px}
+
+.btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:13px 21px;border-radius:4px;border:1px solid var(--line-2);
+  color:var(--text-2);background:var(--bg-2);
+  transition:transform .28s var(--ease),color .28s var(--ease),
+             border-color .28s var(--ease),box-shadow .28s var(--ease),filter .28s var(--ease)
+}
+.btn:hover{transform:translateY(-2px);color:var(--accent);border-color:var(--accent-2);box-shadow:0 6px 20px var(--accent-glow)}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:500}
+.btn-solid:hover{color:var(--bg);filter:brightness(1.12)}
+
+.hero-photo{position:relative;display:block;align-self:end;padding-bottom:88px}
+.photo-frame{
+  position:relative;width:100%;max-width:320px;margin:0 auto;
+  aspect-ratio:1/1;             /* the box shape is fixed here, not on the img */
+  flex:0 0 auto
+}
+.photo-frame::before{
+  content:"";position:absolute;inset:16px -16px -16px 16px;border-radius:12px;
+  border:1px solid var(--accent-2);opacity:.5;
+  transition:inset .55s var(--ease),opacity .55s var(--ease)
+}
+.photo-frame:hover::before{inset:22px -22px -22px 22px;opacity:.95}
+.photo-frame img{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  object-fit:cover;object-position:50% 34%;
+  border-radius:12px;border:1px solid var(--line-2);
+  box-shadow:var(--shadow);filter:saturate(.92) contrast(1.03)
+}
+.photo-frame::after{
+  content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
+  background:linear-gradient(155deg,
+    color-mix(in srgb, var(--accent) 14%, transparent) 0%,
+    transparent 44%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 100%)
+}
+
+@media(max-width:880px){
+  .hero-inner{grid-template-columns:1fr;padding-top:54px;gap:0}
+  .hero-copy{order:2;padding-bottom:56px}
+  .hero-photo{order:1;margin-bottom:20px;padding-bottom:0}
+  .photo-frame{max-width:208px}
+  .lede{max-width:none}
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.sec{position:relative;z-index:2;scroll-margin-top:120px;padding:0 0 20px}
+.sec-head{position:relative;padding:74px 0 34px;margin-bottom:6px}
+.sec-head::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:var(--line)}
+.sec-head::after{
+  content:"";position:absolute;top:0;left:0;width:64px;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease) .1s
+}
+.sec.in .sec-head::after{transform:scaleX(1)}
+.sec-label{
+  display:inline-block;margin-bottom:16px;padding:5px 11px;border-radius:3px;
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  border:1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)
+}
+h2{
+  font-family:var(--display);font-weight:600;letter-spacing:-.022em;line-height:1.1;
+  font-size:clamp(1.85rem,3.7vw,2.6rem);color:var(--text)
+}
+h3{font-family:var(--display);font-weight:600;font-size:1.18rem;color:var(--text);margin:36px 0 12px}
+h4{
+  font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:34px 0 13px
+}
+.prose{max-width:var(--measure)}
+.prose p{margin-bottom:19px;color:var(--text-2)}
+.prose p strong{color:var(--text);font-weight:500}
+.prose ul{margin:0 0 19px 20px}
+.prose li{margin-bottom:10px;color:var(--text-2)}
+.prose li strong{color:var(--text);font-weight:500}
+.prose em{font-style:italic}
+
+.pull{
+  margin:30px 0;padding:4px 0 4px 22px;border-left:2px solid var(--brass);
+  font-family:var(--display);font-weight:500;font-size:1.2rem;line-height:1.42;
+  letter-spacing:-.014em;color:var(--accent)
+}
+.note{
+  margin-top:32px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:.93rem;font-style:italic;color:var(--text-3)
+}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.09s}
+.reveal.d2{transition-delay:.18s}
+
+/* panels */
+.panel{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:24px 26px;max-width:var(--measure);box-shadow:var(--shadow)
+}
+.panel h4{margin-top:0}
+.panel p:last-child{margin-bottom:0}
+
+/* case studies */
+.case{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:8px;
+  padding:32px 34px;margin-top:26px;box-shadow:var(--shadow);
+  transition:border-color .4s var(--ease)
+}
+.case:hover{border-color:var(--line-2)}
+@media(max-width:620px){.case{padding:24px 20px}}
+.case-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;margin-bottom:8px}
+.case-org{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.case-when{font-family:var(--mono);font-size:12.5px;color:var(--text-3)}
+.case-title{
+  font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.16;
+  font-size:clamp(1.4rem,2.9vw,1.9rem);margin:0 0 14px;color:var(--text)
+}
+.case-lede{max-width:var(--measure);margin-bottom:22px;color:var(--text-2)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
+.chip{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);
+  background:var(--bg-3);border:1px solid var(--line);border-radius:3px;padding:6px 11px;
+  transition:color .3s var(--ease)
+}
+.case:hover .chip{color:var(--text-2)}
+
+.metrics{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;
+  margin-bottom:30px;max-width:var(--measure)
+}
+.metric{
+  background:var(--bg-3);border:1px solid var(--line);border-radius:5px;padding:18px 20px;
+  transition:border-color .35s var(--ease),transform .35s var(--ease)
+}
+.metric:hover{border-color:var(--accent-2);transform:translateY(-2px)}
+.metric-n{font-family:var(--display);font-weight:600;font-size:1.68rem;letter-spacing:-.02em;color:var(--accent);line-height:1.1}
+.metric-l{font-family:var(--mono);font-size:12px;line-height:1.55;color:var(--text-3);margin-top:8px}
+
+/* diagrams */
+.flow{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 32px;max-width:var(--measure)}
+.flow-step{
+  flex:1 1 120px;background:var(--bg-3);border:1px solid var(--line);border-radius:5px;padding:13px 14px;
+  transition:border-color .35s var(--ease),transform .35s var(--ease)
+}
+.flow-step:hover{border-color:var(--accent-2);transform:translateY(-2px)}
+.fs-n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--brass)}
+.fs-t{font-family:var(--display);font-weight:600;font-size:.97rem;margin:7px 0 6px;line-height:1.25;color:var(--text)}
+.fs-d{font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--text-3)}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 32px;max-width:var(--measure)}
+@media(max-width:620px){.split{grid-template-columns:1fr}}
+.split-card{background:var(--bg-3);border:1px solid var(--line);border-radius:5px;padding:19px 21px}
+.sc-t{font-family:var(--display);font-weight:600;font-size:1.06rem;color:var(--accent);margin-bottom:7px}
+.sc-d{font-size:.98rem;line-height:1.55;color:var(--text-2)}
+
+.figure{margin:10px 0 32px;max-width:var(--measure)}
+.figure svg{width:100%;height:auto;display:block;background:var(--bg-3);border:1px solid var(--line);border-radius:6px}
+figcaption{font-family:var(--mono);font-size:12px;color:var(--text-3);margin-top:13px;line-height:1.7}
+.dg-box{fill:var(--bg-2);stroke:var(--accent-2);stroke-width:1.2}
+.dg-box-fill{fill:var(--accent);stroke:var(--accent)}
+.dg-text{font-family:'JetBrains Mono',monospace;font-size:13px;fill:var(--text)}
+.dg-text-inv{font-family:'JetBrains Mono',monospace;font-size:13px;fill:var(--bg)}
+.dg-edge{stroke:var(--line-2);stroke-width:1.4;fill:none}
+.dg-cap{font-family:'JetBrains Mono',monospace;font-size:11.5px;fill:var(--brass)}
+.dg-axis{font-family:'JetBrains Mono',monospace;font-size:12px;fill:var(--text-3)}
+
+/* details */
+details.full{margin-top:8px;max-width:var(--measure)}
+details.full > summary{
+  list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--accent);background:var(--bg-3);border:1px solid var(--line-2);
+  border-radius:4px;padding:12px 19px;
+  transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)
+}
+details.full > summary::-webkit-details-marker{display:none}
+details.full > summary:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px)}
+.caret{display:inline-block;transition:transform .35s var(--ease)}
+details.full[open] > summary .caret{transform:rotate(90deg)}
+details.full[open] > summary{margin-bottom:12px}
+.full-body{
+  margin-top:16px;padding-top:18px;border-top:1px solid var(--line);
+  animation:unfold .55s var(--ease)
+}
+@keyframes unfold{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* callout + legend */
+.callout{
+  background:var(--bg-3);border:1px solid var(--line);border-left:2px solid var(--brass);
+  border-radius:0 6px 6px 0;padding:22px 24px;margin:28px 0;max-width:var(--measure)
+}
+.callout h4{margin-top:0;color:var(--brass)}
+.callout p:last-child{margin-bottom:0}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
+.legend span{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.legend i{width:16px;height:2px;display:inline-block;border-radius:1px}
+
+/* roles */
+.roles{max-width:var(--measure)}
+.role-row{
+  display:grid;grid-template-columns:1fr auto;gap:7px 24px;align-items:baseline;
+  padding:18px 16px;border-radius:5px;border:1px solid transparent;
+  border-top-color:var(--line);
+  transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)
+}
+.roles .role-row:first-child{border-top-color:transparent}
+.role-row:hover{background:var(--bg-2);border-color:var(--line-2);transform:translateX(4px)}
+.role-main{font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--text)}
+.role-main span{font-weight:400;color:var(--accent)}
+.role-date{font-family:var(--mono);font-size:12.5px;color:var(--text-3);white-space:nowrap}
+.role-desc{grid-column:1/-1;font-size:.99rem;line-height:1.6;color:var(--text-2)}
+@media(max-width:620px){.role-row{grid-template-columns:1fr}.role-date{white-space:normal}}
+
+/* skills */
+.skills{max-width:var(--measure)}
+.skill-row{
+  display:grid;grid-template-columns:196px 1fr;gap:10px 26px;
+  padding:17px 16px;border-radius:5px;border:1px solid transparent;
+  border-top-color:var(--line);
+  transition:background .3s var(--ease),border-color .3s var(--ease)
+}
+.skills .skill-row:first-child{border-top-color:transparent}
+.skill-row:hover{background:var(--bg-2);border-color:var(--line-2)}
+.skill-cat{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:4px}
+.skill-list{font-size:1.02rem;line-height:1.8;color:var(--text-2)}
+.learning .skill-cat{color:var(--brass)}
+@media(max-width:620px){.skill-row{grid-template-columns:1fr;gap:5px}}
+
+/* education */
+.edu{max-width:var(--measure)}
+.edu-item{padding:20px 0;border-bottom:1px solid var(--line)}
+.edu-item:last-of-type{border-bottom:none}
+.edu-deg{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--text)}
+.edu-meta{font-family:var(--mono);font-size:12.5px;color:var(--text-3);margin-top:7px}
+.edu-thesis{font-size:.98rem;font-style:italic;color:var(--text-2);margin-top:8px}
+.honours{margin-top:24px;font-size:.99rem;line-height:1.75;color:var(--text-2)}
+.honours strong{color:var(--text);font-weight:500}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;max-width:940px;align-items:start}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+.form-panel{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:26px 28px;box-shadow:var(--shadow)}
+.field{margin-bottom:16px}
+label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:7px}
+input,textarea{
+  width:100%;font-family:var(--body);font-size:16px;color:var(--text);
+  background:var(--bg-3);border:1px solid var(--line);border-radius:4px;padding:12px 14px;
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease)
+}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+textarea{min-height:132px;resize:vertical}
+button.send{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;
+  background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:4px;
+  padding:12px 26px;font-weight:500;
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),filter .28s var(--ease)
+}
+button.send:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 8px 24px var(--accent-glow)}
+
+/* footer */
+footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:96px;padding:36px 0 50px}
+.foot-inner{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
+.foot-inner p,.foot-inner a{font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.foot-links{display:flex;gap:22px}
+.foot-links a{transition:color .3s var(--ease)}
+.foot-links a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Amin Hosseinniya</h1>
-    <p class="role">Data Scientist &nbsp;|&nbsp; ML Engineer</p>
-    <p class="note">Portfolio site under construction — case studies coming soon.</p>
-    <div class="links">
-      <a href="mailto:AminHosseinniya@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/AminHosseinniya" target="_blank">LinkedIn</a>
-      <a href="https://github.com/AminHosseinniya" target="_blank">GitHub</a>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ FIXED GRAPH BACKGROUND ============ -->
+<div class="bg-layer" aria-hidden="true">
+  <svg class="bg-blur" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+    <g stroke="var(--accent-2)" stroke-opacity=".55" stroke-width="1" fill="none">
+      <path d="M120 660 L268 540 L410 596 L540 430 L690 500 L850 372 L1000 448 L1160 330 L1330 410"/>
+      <path d="M268 540 L318 762 L500 800 L540 430"/>
+      <path d="M690 500 L742 742 L940 780 L1000 448"/>
+      <path d="M410 596 L500 800"/>
+      <path d="M850 372 L800 182 L600 140 L540 430"/>
+      <path d="M1160 330 L1210 152 L1010 96 L850 372"/>
+      <path d="M600 140 L410 596"/><path d="M1010 96 L800 182"/>
+      <path d="M120 660 L60 420 L200 240 L410 596"/>
+      <path d="M1330 410 L1280 640 L1090 700 L1000 448"/>
+    </g>
+    <g fill="var(--accent)" fill-opacity=".75">
+      <circle cx="120" cy="660" r="3.5"/><circle cx="268" cy="540" r="4.5"/><circle cx="410" cy="596" r="3.5"/>
+      <circle cx="540" cy="430" r="5"/><circle cx="690" cy="500" r="3.5"/><circle cx="850" cy="372" r="5"/>
+      <circle cx="1000" cy="448" r="3.5"/><circle cx="1160" cy="330" r="4.5"/><circle cx="1330" cy="410" r="3.5"/>
+      <circle cx="318" cy="762" r="3.5"/><circle cx="500" cy="800" r="4"/><circle cx="742" cy="742" r="3.5"/>
+      <circle cx="940" cy="780" r="4"/><circle cx="800" cy="182" r="4"/><circle cx="600" cy="140" r="3.5"/>
+      <circle cx="1210" cy="152" r="3.5"/><circle cx="1010" cy="96" r="4"/><circle cx="60" cy="420" r="3"/>
+      <circle cx="200" cy="240" r="3.5"/><circle cx="1280" cy="640" r="3.5"/><circle cx="1090" cy="700" r="3"/>
+    </g>
+  </svg>
+
+  <div class="bg-scrim"></div>
+
+  <svg class="bg-chain" viewBox="0 0 340 800" preserveAspectRatio="xMinYMid meet">
+    <path class="chain-edge" id="ce-0" d="M78 90 L128 190"/>
+    <path class="chain-edge" id="ce-1" d="M128 190 L74 296"/>
+    <path class="chain-edge" id="ce-2" d="M74 296 L134 402"/>
+    <path class="chain-edge" id="ce-3" d="M134 402 L80 506"/>
+    <path class="chain-edge" id="ce-4" d="M80 506 L130 606"/>
+    <path class="chain-edge" id="ce-5" d="M130 606 L78 706"/>
+
+    <circle class="chain-node" id="cn-about" cx="78" cy="90" r="6"/><circle class="chain-halo" cx="78" cy="90" r="6"/>
+    <circle class="chain-node" id="cn-work" cx="128" cy="190" r="6"/><circle class="chain-halo" cx="128" cy="190" r="6"/>
+    <circle class="chain-node" id="cn-research" cx="74" cy="296" r="6"/><circle class="chain-halo" cx="74" cy="296" r="6"/>
+    <circle class="chain-node" id="cn-experience" cx="134" cy="402" r="6"/><circle class="chain-halo" cx="134" cy="402" r="6"/>
+    <circle class="chain-node" id="cn-skills" cx="80" cy="506" r="6"/><circle class="chain-halo" cx="80" cy="506" r="6"/>
+    <circle class="chain-node" id="cn-education" cx="130" cy="606" r="6"/><circle class="chain-halo" cx="130" cy="606" r="6"/>
+    <circle class="chain-node" id="cn-contact" cx="78" cy="706" r="6"/><circle class="chain-halo" cx="78" cy="706" r="6"/>
+
+    <text class="chain-label" id="cl-about" x="94" y="94">About</text>
+    <text class="chain-label" id="cl-work" x="144" y="194">Work</text>
+    <text class="chain-label" id="cl-research" x="90" y="300">Research</text>
+    <text class="chain-label" id="cl-experience" x="150" y="406">Experience</text>
+    <text class="chain-label" id="cl-skills" x="96" y="510">Skills</text>
+    <text class="chain-label" id="cl-education" x="146" y="610">Education</text>
+    <text class="chain-label" id="cl-contact" x="94" y="710">Contact</text>
+  </svg>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="mark" href="https://www.linkedin.com/in/AminHosseinniya" target="_blank" rel="noopener">Amin <b>Hosseinniya</b></a>
+    <nav class="topnav" id="topnav">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Switch colour theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4.2"/>
+        <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Data Scientist &nbsp;·&nbsp; ML Engineer</div>
+      <h1>Amin<br>Hosseinniya</h1>
+      <div class="role">Five years across commodity trading, food-tech &amp; industry</div>
+      <p class="lede">I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.</p>
+      <p class="avail">Open to Data Scientist roles across Europe.<br>I require visa sponsorship.</p>
+      <div class="hero-links">
+        <a class="btn btn-solid" href="mailto:AminHosseinniya@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/AminHosseinniya" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/AminHosseinniya" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="/cv.pdf">Download CV</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <img src="assets/amin.jpg" alt="Amin Hosseinniya" width="880" height="880">
+      </div>
     </div>
   </div>
+</section>
+
+<main id="main">
+
+<!-- ============ ABOUT ============ -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">About</div>
+      <h2>I did not set out to do this</h2>
+    </div>
+    <div class="prose reveal d1">
+      <p>I started in mechanical engineering at <a class="plain" href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University</a>, and it took about a year to work out that mechanics was not what I wanted to spend a career on.</p>
+      <p>What I had instead was the department itself. Students a year or two ahead of us — some from other fields entirely — ran their own machine learning classes and projects, taught properly and taught free. I went to all of them. That is where I found the thing I actually wanted to do, and by the end I had talked my way into writing a mechanical engineering thesis on convolutional neural networks.</p>
+      <p>The rest followed from there.</p>
+      <p>What I like has stayed consistent since. I like being handed data nobody has structured yet and working out what is genuinely in it. I like questions that come from the business rather than from a dataset. And I like the part most people skip — getting a model out of the notebook and into something people use on a Monday morning.</p>
+      <p>I am curious in a way that is occasionally inconvenient. I would rather find a solution to an unsolved problem, or a different solution to a solved one, than apply a known approach cleanly. Mathematics is where I am most comfortable, and it is why graph neural networks appealed to me enough to build a thesis around them.</p>
+      <p>Outside work: I play daf and setar, and I teach daf. I co-founded a podcast. I hike, and I lose at chess with some regularity.</p>
+    </div>
+    <div class="panel reveal d2" style="margin-top:14px">
+      <h4>Why Europe</h4>
+      <p>Honestly, because I want to live there. I travel constantly, I get along with people from anywhere quickly, and I have an ear for languages. It is where I want to build a life, not just a career.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Selected Work</div>
+      <h2>Three systems, and the reasoning behind them</h2>
+    </div>
+
+    <article class="case reveal d1">
+      <div class="case-head">
+        <a class="case-org" href="https://www.linkedin.com/company/snappfood/posts/?feedView=all" target="_blank" rel="noopener">Snappfood</a>
+        <span class="case-when">Data Scientist · Feb 2025 – Jan 2026</span>
+      </div>
+      <h3 class="case-title">Turning 500 hours of phone calls into a measurable signal</h3>
+      <p class="case-lede">An LLM pipeline that converted ~6,000 monthly vendor calls in Persian into structured, countable complaint data — at a company that had complaint records everywhere and no way to read them together.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">Gemini API</span><span class="chip">OpenAI API</span>
+        <span class="chip">LLaMA</span><span class="chip">PostgreSQL</span><span class="chip">ETL</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-n">~500 h</div><div class="metric-l">of Persian audio<br>processed monthly</div></div>
+        <div class="metric"><div class="metric-n">~80%</div><div class="metric-l">less complaint<br>processing time*</div></div>
+        <div class="metric"><div class="metric-n">4 → 1</div><div class="metric-l">complaint channels<br>unified into one schema</div></div>
+      </div>
+
+      <h4>Pipeline</h4>
+      <div class="flow">
+        <div class="flow-step"><div class="fs-n">01</div><div class="fs-t">Transcription</div><div class="fs-d">Raw audio → Persian transcript, speakers separated</div></div>
+        <div class="flow-step"><div class="fs-n">02</div><div class="fs-t">Segmentation</div><div class="fs-d">Transcript → discrete complaint units</div></div>
+        <div class="flow-step"><div class="fs-n">03</div><div class="fs-t">Normalisation</div><div class="fs-d">Colloquial Persian → written Persian</div></div>
+        <div class="flow-step"><div class="fs-n">04</div><div class="fs-t">Extraction</div><div class="fs-d">Unit → the underlying issue, structured</div></div>
+        <div class="flow-step"><div class="fs-n">05</div><div class="fs-t">Load</div><div class="fs-d">Records → warehouse, keyed by call &amp; complaint</div></div>
+      </div>
+
+      <p class="pull">The core decision was to decompose rather than to prompt harder.</p>
+
+      <details class="full">
+        <summary><span class="caret">▸</span> Read the full case study</summary>
+        <div class="full-body prose">
+          <h4>The problem</h4>
+          <p>Snappfood is the largest food delivery platform in its market, and it runs on its vendors. When vendors are unhappy, they leave.</p>
+          <p>The company already collected complaints. It had a ticketing system, a social media presence, and a complaints channel inside the vendor-side app. What it did not have was any way to look at that data as a whole. Nobody could answer which problem was the most common, whether a given problem was getting better or worse, or which team's backlog was actually hurting vendors most. Tickets went to the responsible team and disappeared into it.</p>
+          <p>The failure mode was visible from the outside: vendors would call and say they had filed the same ticket several times and nothing had changed. Individually, every ticket had been routed correctly. Collectively, nobody was watching.</p>
+          <p>For that cycle, the Commercial Planning team was given a single mission — raise vendor satisfaction. You cannot raise a number you are not measuring, so the first problem was measurement.</p>
+
+          <h4>The scale</h4>
+          <p>To get a direct signal, five promoters began calling vendors: roughly 120 calls each per day, around 6,000 calls a month, each two to seven minutes long. About <strong>500 hours of Persian-language audio every month</strong>.</p>
+          <p>That volume is the whole problem. Five hundred hours is far past what any team can listen to, and listening is only step one — someone then has to decide what each call was actually about and count it consistently against every other call. Done by hand, the analysis would have finished long after the cycle it was meant to inform.</p>
+
+          <h4>What made it hard</h4>
+          <ul>
+            <li><strong>Persian is a low-resource language for speech models.</strong> Transcription quality that would be unremarkable in English is genuinely difficult here, and this shaped every downstream decision.</li>
+            <li><strong>The recording conditions were the worst case.</strong> Vendors answered from restaurant floors and working kitchens. Background noise was the norm, not the exception.</li>
+            <li><strong>Vendors did not state problems cleanly.</strong> People describe frustration, not categories. A complaint arrived mid-sentence, wrapped in context, often with several separate issues in one call.</li>
+            <li><strong>Attribution was frequently wrong.</strong> A vendor would report a problem under the team they associated with the symptom rather than the team that owned the cause.</li>
+            <li><strong>No labelled data existed.</strong> Nothing to fine-tune on, nothing to validate against, no prior taxonomy.</li>
+          </ul>
+
+          <h4>Approach</h4>
+          <p>The obvious design is one model, one prompt: audio in, structured complaints out. I tested that and rejected it. Asking a single model to transcribe noisy Persian audio, separate speakers, identify multiple distinct complaints, normalise colloquial speech, and classify each one pushes every weakness at once, and when the output is wrong there is no way to tell which part failed.</p>
+          <p>Splitting the work into stages meant each stage could be evaluated on its own, each stage could use whichever provider was actually best at that specific task, and later stages could correct errors introduced by earlier ones. A messy transcription is recoverable if a subsequent stage is explicitly responsible for cleaning it. Inside one prompt, it is not.</p>
+          <p><strong>Provider selection was benchmarked, not assumed.</strong> I built a fixed sample of around 50 calls and ran it through each candidate at each stage — hosted models from multiple providers alongside locally-hosted open models — then selected per stage on measured performance rather than picking one vendor for the whole pipeline. The models that won differed by stage, which is precisely why routing per stage was worth the added complexity.</p>
+          <p>Splitting a call into complaint units before extraction matters more than it looks. It is what makes the output countable: one call with three problems becomes three rows, not one blurred summary, so the same call can register against three different owning teams.</p>
+
+          <h4>Data model</h4>
+          <p>The pipeline fed a schema I designed from scratch: one table per complaint source — ticketing system, social media, promoter calls, in-app vendor reports — plus a unified table consolidating all four into a common structure, plus metadata tables.</p>
+          <p>The unification is the point. A complaint raised by phone and the same complaint raised through the app previously lived in unrelated systems and were never counted together. Bringing them into one structure was what turned four disconnected streams into a single measurable signal.</p>
+
+          <h4>What I rejected, and why</h4>
+          <ul>
+            <li><strong>One model for the entire pipeline</strong> — worse results and higher cost than routing per stage.</li>
+            <li><strong>End-to-end in a single prompt</strong> — not feasible; model limitations surfaced immediately and failures were undiagnosable.</li>
+            <li><strong>Fine-tuning a dedicated model</strong> — no labelled Persian data existed, and building a corpus would have consumed the cycle the project was meant to inform.</li>
+            <li><strong>Classical NLP</strong> — keyword and rule-based approaches could not handle unstructured conversational Persian with implicit, mis-attributed complaints.</li>
+          </ul>
+
+          <h4>Failure handling</h4>
+          <p>Unusable audio was tagged as such rather than silently dropped, as were segments too unclear to interpret — so the gap stayed visible in the data instead of quietly biasing it. Calls containing no complaint were a normal outcome, not an error, and were recorded as satisfied.</p>
+
+          <h4>Validation and operation</h4>
+          <p>I manually spot-checked over 100 calls end to end against pipeline output. This is not a formal evaluation set — there was no ground truth to build one from — and I would describe it as exactly what it was: enough to establish that the extraction was reliable, not enough to put a precision figure on it.</p>
+          <p>The pipeline was written as parameterised stages and run on a weekly cadence.</p>
+
+          <h4>Outcome</h4>
+          <p>Complaint processing time dropped by roughly 80% against the manual baseline — an estimate from the team lead comparing the new process to what the work had previously required, not an instrumented measurement.</p>
+          <p>The more important change was categorical rather than incremental. <strong>The business could see vendor satisfaction as a continuous, decomposed signal for the first time.</strong> Complaint volume by issue, by owning team, and by month became something you could look up rather than something you had to guess at, and fix prioritisation moved onto that basis.</p>
+          <p>What surprised me was how responsive the signal turned out to be. When the business acted on a problem area, the complaint data moved in the expected direction within months. That is the outcome you hope for and still do not expect to see so clearly — it meant the pipeline was not just producing plausible output, it was tracking reality closely enough to function as a feedback loop.</p>
+          <p>The system was handed over to my successor when I left.</p>
+
+          <h4>What I would do differently</h4>
+          <p>I designed the full schema — all four sources, unified table, metadata — before any of it had processed real data. It worked, but it was a bet.</p>
+          <p>I would build for one source first, run it end to end, break it, fix it, and only then generalise the structure to the rest. The cost of finding a modelling mistake after four sources are built on top of it is far higher than the cost of building the fourth source twice.</p>
+
+          <p class="note">Under NDA, this write-up describes the system's architecture and process only. Specific findings, complaint categories, and satisfaction metrics are omitted. *The ~80% figure is a team lead's estimate against the manual baseline, not an instrumented measurement.</p>
+        </div>
+      </details>
+    </article>
+
+    <article class="case reveal d1">
+      <div class="case-head">
+        <a class="case-org" href="https://www.linkedin.com/company/faratarhsteel/" target="_blank" rel="noopener">Faratrah Steel</a>
+        <span class="case-when">Data Scientist · Mar 2024 – Feb 2025</span>
+      </div>
+      <h3 class="case-title">Replacing intuition with systems</h3>
+      <p class="case-lede">Two separate projects, alike in nothing but subject matter. Both replaced a decision being made on gut feel — in one case by the planning team, in the other by the CEO — with something the business could inspect, question, and rely on.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">XGBoost</span><span class="chip">ARIMA</span>
+        <span class="chip">PostgreSQL</span><span class="chip">Time Series</span><span class="chip">Credit Risk</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-n">38% → &lt;20%</div><div class="metric-l">mean absolute error<br>vs. the legacy model</div></div>
+        <div class="metric"><div class="metric-n">6 tiers</div><div class="metric-l">credit segmentation<br>replacing ad-hoc judgement</div></div>
+        <div class="metric"><div class="metric-n">~300</div><div class="metric-l">customers scored<br>monthly</div></div>
+      </div>
+
+      <h4>Why two models, not one</h4>
+      <div class="split">
+        <div class="split-card"><div class="sc-t">XGBoost</div><div class="sc-d">Stronger at short horizons, where the recent feature set carries most of the signal.</div></div>
+        <div class="split-card"><div class="sc-t">ARIMA</div><div class="sc-d">Stronger at long horizons, where the series structure matters more than any single week's inputs.</div></div>
+      </div>
+
+      <p class="pull">The failure was not that the model was missing. The model was there, running, and being politely worked around.</p>
+
+      <details class="full">
+        <summary><span class="caret">▸</span> Read the full case study</summary>
+        <div class="full-body prose">
+          <h3>Part One — Forecasting competitor prices</h3>
+
+          <h4>The problem</h4>
+          <p>The company sells steel through the national commodity exchange. On offer day, every supplier announces the price at which they will sell. Buyers then choose.</p>
+          <p>That makes pricing a bet with a narrow window. Price too high and competitors take the trade. Price too low and you win the trade and lose the margin. The planning team had to make that call for each offer, and what would have made it easy — knowing what everyone else was about to announce — was exactly what nobody knew.</p>
+          <p>So the question was direct: <strong>what price will each competing supplier announce this week?</strong></p>
+
+          <h4>Why the existing model wasn't used</h4>
+          <p>A forecasting model already existed. It was deployed, it was monitored, and it carried roughly <strong>38% mean absolute error</strong>.</p>
+          <p>At that error level, a forecast is not a weak signal — it is noise wearing the costume of information. It was accurate enough to be usable for a handful of the most predictable suppliers and useless for the rest, which meant it could not be trusted as a system. The planning team did the rational thing and ignored it, pricing on experience and instinct instead.</p>
+          <p>This is the part worth sitting with. Rebuilding it meant not just improving accuracy but clearing the accumulated evidence that this kind of thing does not work here.</p>
+
+          <h4>Approach</h4>
+          <p>I built the model on four years of national exchange history: demand, traded quantities, the set of participating companies, and time-based features, enriched with foreign exchange rates — because in an import-exposed market, currency movement drives input costs and therefore pricing behaviour.</p>
+          <p><strong>The final model combined XGBoost and ARIMA, because they failed in different places.</strong> Neither was better everywhere, so choosing one meant accepting known weakness across half the forecast range.</p>
+          <p><strong>What did not work:</strong> LSTM and plain regression. The LSTM is the interesting failure — a deep sequence model on four years of weekly observations is a model with far more capacity than the data can constrain. It fit and it did not generalise. Regression failed in the opposite direction, too rigid for a series with this much nonlinear interaction between demand, participation, and currency.</p>
+
+          <h4>Outcome</h4>
+          <p><strong>Mean absolute error fell from roughly 38% to under 20%</strong> — a reduction of 18.5 percentage points against the legacy model on the same evaluation.</p>
+          <p>More usefully: the forecast crossed the line from noise into something the planning and supply teams actually priced against. The model ran in Python against the company database on a weekly cycle — once suppliers announced their base prices, the feature set completed and the forecast generated automatically. A failure surfaced as a failed database job rather than a silently stale number, which matters when someone is about to make a pricing decision on the output.</p>
+
+          <h3>Part Two — A credit scoring system</h3>
+
+          <h4>The problem</h4>
+          <p>The company extended trade credit to its customers. The decision of who received it, and how much, was made by the CEO, based on his own knowledge of each customer and how they had behaved historically.</p>
+          <p>To be fair to that process: it was not arbitrary and it was not usually wrong. He knew these customers. But it did not scale, it could not be delegated, it could not be explained to a customer who was refused, and it left with the person holding it. It was judgement, and judgement is not a system.</p>
+          <p>Around 300 customers, and roughly $1M of credit exposure the business could absorb.</p>
+
+          <h4>Approach</h4>
+          <p>I structured the scoring around the <strong>5C credit framework</strong> — character, capacity, capital, collateral, conditions — rather than inventing a scoring scheme from scratch. That choice was as much about adoption as about modelling. A finance team can interrogate a framework they already recognise, and a model nobody in finance can argue with is a model nobody in finance will use.</p>
+          <p>Inputs came from two directions: financial reports and actual payment behaviour, alongside firmographic signals — production capacity, assets, company size.</p>
+          <p>The tiers were <strong>not</strong> a modelling output. The model produced a continuous score; the six tiers, from full credit eligibility down to no credit, were drawn by the business. Where the cut points fall is a question about risk appetite, and risk appetite belongs to the people carrying the risk.</p>
+
+          <h4>Earning trust</h4>
+          <p>The validation that mattered was not the technical one, though historical data and known defaults gave us that.</p>
+          <p>It was this: we scored the existing customer base and showed that the customers who had held credit for years, on the CEO's own judgement, scored highly under the model. <strong>The system agreed with the expert where the expert was confident.</strong></p>
+          <p>That reframed the entire conversation. The model was no longer a machine proposing to overrule a person — it was a formalisation of reasoning the business already trusted, extended consistently to customers nobody had time to assess that carefully. The disagreements then became worth examining rather than worth resisting.</p>
+          <p>The pipeline ran monthly against fresh data from the finance team, replacing an opaque process with a documented and repeatable one.</p>
+
+          <h4>What I would do differently</h4>
+          <p>I would use fewer features. The firmographic signals — size, capacity, assets — carried far less weight than actual financial behaviour, and in hindsight they mostly added surface area. How a customer has paid is a sharper predictor of how they will pay than how large they are. A leaner model would have been easier to explain, easier to maintain, and probably no less accurate.</p>
+
+          <p class="note">Financial data is confidential. This write-up describes methodology and outcomes only; no customer data, scores, or commercial figures are disclosed.</p>
+        </div>
+      </details>
+    </article>
+
+    <article class="case reveal d1">
+      <div class="case-head">
+        <a class="case-org" href="https://acer-trading.com/" target="_blank" rel="noopener">ACER Trading</a>
+        <span class="case-when">Data Scientist · Jan 2026 – Present</span>
+      </div>
+      <h3 class="case-title">Building a data function from nothing</h3>
+      <p class="case-lede">On day one the analytics function was a fortnightly PDF and a folder of spreadsheets. It is now a data model, automated pipelines, defined metrics, and twenty people making daily decisions on numbers they can trace.</p>
+      <div class="stack">
+        <span class="chip">PostgreSQL</span><span class="chip">Python</span><span class="chip">ETL</span>
+        <span class="chip">Metabase</span><span class="chip">Data Modelling</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-n">10+</div><div class="metric-l">tables modelled<br>from scratch</div></div>
+        <div class="metric"><div class="metric-n">4</div><div class="metric-l">dashboards serving a<br>20-person operations team</div></div>
+        <div class="metric"><div class="metric-n">1</div><div class="metric-l">data person<br>(me)</div></div>
+      </div>
+
+      <h4>Core entities</h4>
+      <figure class="figure">
+        <svg viewBox="0 0 700 250" role="img" aria-label="Entity relationship diagram: vendors, contracts, goods, shipments, vessels and trips">
+          <g class="dg-edge">
+            <path d="M130 62 L228 62"/><path d="M310 84 L310 134"/><path d="M388 62 L486 62"/>
+            <path d="M310 84 L444 134"/><path d="M568 84 L568 134"/><path d="M526 160 L524 160"/>
+          </g>
+          <rect class="dg-box" x="24" y="42" width="106" height="40" rx="4"/>
+          <text class="dg-text" x="77" y="67" text-anchor="middle">vendors</text>
+          <rect class="dg-box dg-box-fill" x="232" y="42" width="156" height="40" rx="4"/>
+          <text class="dg-text-inv" x="310" y="67" text-anchor="middle">contracts</text>
+          <rect class="dg-box" x="490" y="42" width="156" height="40" rx="4"/>
+          <text class="dg-text" x="568" y="67" text-anchor="middle">goods</text>
+          <rect class="dg-box" x="232" y="138" width="156" height="40" rx="4"/>
+          <text class="dg-text" x="310" y="163" text-anchor="middle">shipments</text>
+          <rect class="dg-box" x="400" y="138" width="120" height="40" rx="4"/>
+          <text class="dg-text" x="460" y="163" text-anchor="middle">trips</text>
+          <rect class="dg-box" x="530" y="138" width="120" height="40" rx="4"/>
+          <text class="dg-text" x="590" y="163" text-anchor="middle">vessels</text>
+          <text class="dg-cap" x="350" y="220" text-anchor="middle">many consignees · many currencies · one contract</text>
+        </svg>
+        <figcaption>The entities were the easy part. The hard part was where the real world refused to be one-to-one.</figcaption>
+      </figure>
+
+      <p class="pull">A dashboard built on hand-entered data is a faster way to distribute the same errors.</p>
+
+      <details class="full">
+        <summary><span class="caret">▸</span> Read the full case study</summary>
+        <div class="full-body prose">
+          <h4>Day one</h4>
+          <p>A commodity trading company. Vessels arrive, goods clear, contracts settle, money moves.</p>
+          <p>What existed as "data" on my first day: a PDF, delivered every two weeks, reporting national import figures for the commodity. And a set of Excel files holding the company's own trading history.</p>
+          <p>That was the analytics function. Not a bad one — the actual one. Everything else lived in the heads of the people doing the work, and in documents that had to be read one at a time by someone who already knew what they were looking for.</p>
+          <p>I was hired as the only data person, which meant the first question was not <em>what should I build</em> but <em>what should I build first</em>.</p>
+
+          <h4>Sequencing</h4>
+          <p>With no data function at all, everything is urgent and nothing is prioritised for you. I worked in four stages, and the order was the decision:</p>
+          <ul>
+            <li><strong>Find out what each source actually contains.</strong> Not what it is called or what people believe it holds — what is genuinely in it, field by field. This is unglamorous and it is where most of the surprises are.</li>
+            <li><strong>Clean each dataset.</strong> Establish what a valid record looks like before anything downstream depends on it.</li>
+            <li><strong>Automate the manual steps that feed the data.</strong> This came <em>before</em> the dashboards, deliberately. Removing the manual step removes the error class, and it is much cheaper to do before people have started trusting the output.</li>
+            <li><strong>Then model, load, and visualise.</strong> Only once the inputs were reliable.</li>
+          </ul>
+          <p>The instinct is to build the dashboard first, because it is the visible thing and it is what leadership asked for. The dashboard is also worthless if the numbers underneath it are wrong, and worse than worthless once people have begun making decisions on it.</p>
+
+          <h4>Modelling the domain</h4>
+          <p>The schema grew to over ten tables in PostgreSQL, built around the entities the business actually runs on: <strong>vessels, vendors, goods, contracts, the shipments belonging to each contract, and the trips a vessel makes.</strong></p>
+          <p>The hard part was not the entities. It was the places where the real world refused to be one-to-one. A contract can have several consignees. A contract can be denominated in several currencies. Every one of these is obvious to a trader and invisible in a naive schema — and each one, modelled wrongly, produces numbers that look plausible and are quietly incorrect.</p>
+          <p>Getting these right was most of the modelling work, and finding them meant asking the operations team about cases they considered too routine to mention.</p>
+          <p>Data reaches the system three ways: parsed from documents, pulled from national trade and customs reporting, and entered by hand where no other source exists. Reducing that last category is ongoing.</p>
+
+          <h4>What people use</h4>
+          <p>Python ETL pipelines feed four Metabase dashboards, used by a twenty-person operations team for vessel tracking, trip-level analytics, and daily trading reports.</p>
+          <p>Two of the dashboards are the core: one covering the company's own position, one covering the wider national market it competes in. The other two were built on external sources that have since become unavailable — which is its own lesson. A dashboard is only as durable as the data feeding it, and when you do not own the source, you are one policy change away from losing it. Anything built on external data now gets designed with that assumption.</p>
+          <p><strong>I chose Metabase over Power BI or Superset for a reason that had nothing to do with features:</strong> the learning curve is short. I am the only data person here, and I will not always be. A tool that the next person can pick up without training is worth more to this company than one with a longer capability ceiling that leaves with me.</p>
+
+          <h4>Defining what to measure</h4>
+          <p>Some of the most useful work was not technical. The company was operating with metrics that had never been formally defined — <strong>mean sales price, mean purchase price, and P&amp;L</strong> did not exist as agreed, computed numbers until they were specified and built.</p>
+          <p>Naming a metric sounds trivial and is not. It forces the questions nobody had needed to answer: which trades count, at what point a price is fixed, how currency is handled when a contract spans several. Answering those turned informal understanding into something the whole team could reference.</p>
+          <p>A related example: leadership asked for "a platform where we can see all the invoices, contracts, and performance in one place." That is one sentence describing two different systems. I split it — the analytical half is a dashboard layer, the operational half is an ERP — and made the case that conflating them produces a tool that does neither job. The ERP is now under development.</p>
+
+          <h4>Being the only one</h4>
+          <p>The technical challenge of working alone is manageable. The part I miss is the other thing a team gives you: three people arguing toward a solution none of them would have reached individually. Working solo, you get your own first idea, and you have to be disciplined about interrogating it the way a colleague would.</p>
+
+          <h4>Where it stands</h4>
+          <p>The foundation is in place and in daily use. The ERP is being built. The share of data still entering by hand is the number I most want to reduce.</p>
+        </div>
+      </details>
+    </article>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section class="sec" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Research</div>
+      <h2>Detecting cognitive load in EEG using heterogeneous graph neural networks</h2>
+    </div>
+    <div class="prose reveal d1">
+      <p style="font-family:var(--mono);font-size:11.5px;color:var(--text-3);margin-bottom:26px">
+        M.S. thesis, Tarbiat Modares University · Submitted to <em>Scientific Reports</em> ·
+        <a href="https://zenodo.org/records/20593024" target="_blank" rel="noopener">Read the preprint →</a>
+      </p>
+      <p><strong>The idea.</strong> Most EEG models treat the signal as a flat vector or a time series. Both throw away something real: the brain is a network, and cognitive load shows up in how regions relate to each other, not only in what each electrode records on its own. A graph neural network can represent that relational structure directly.</p>
+    </div>
+
+    <figure class="figure reveal d2">
+      <svg viewBox="0 0 700 240" role="img" aria-label="Heterogeneous graph with temporal, cross-channel and similarity edges">
+        <g fill="none" stroke-width="1.6">
+          <g stroke="var(--accent)" stroke-opacity=".9">
+            <path d="M110 60 L250 60"/><path d="M250 60 L390 60"/><path d="M390 60 L530 60"/>
+            <path d="M110 180 L250 180"/><path d="M250 180 L390 180"/><path d="M390 180 L530 180"/>
+          </g>
+          <g stroke="var(--brass)" stroke-opacity=".9">
+            <path d="M110 60 L110 180"/><path d="M250 60 L250 180"/>
+            <path d="M390 60 L390 180"/><path d="M530 60 L530 180"/>
+          </g>
+          <g stroke="var(--accent-2)" stroke-opacity=".8" stroke-dasharray="4 4">
+            <path d="M110 60 L390 180"/><path d="M250 60 L530 180"/><path d="M110 180 L390 60"/>
+          </g>
+        </g>
+        <g fill="var(--accent)">
+          <circle cx="110" cy="60" r="7"/><circle cx="250" cy="60" r="7"/><circle cx="390" cy="60" r="7"/><circle cx="530" cy="60" r="7"/>
+          <circle cx="110" cy="180" r="7"/><circle cx="250" cy="180" r="7"/><circle cx="390" cy="180" r="7"/><circle cx="530" cy="180" r="7"/>
+        </g>
+        <g class="dg-axis">
+          <text x="592" y="64">channel A</text><text x="592" y="184">channel B</text>
+          <text x="110" y="222" text-anchor="middle">t₁</text><text x="250" y="222" text-anchor="middle">t₂</text>
+          <text x="390" y="222" text-anchor="middle">t₃</text><text x="530" y="222" text-anchor="middle">t₄</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i> temporal</span>
+        <span><i style="background:var(--brass)"></i> cross-channel</span>
+        <span><i style="background:var(--accent-2)"></i> sub-window similarity</span>
+      </div>
+      <figcaption>"Heterogeneous" means three distinct edge types, so different kinds of relationship are modelled as different kinds of connection rather than flattened into one adjacency matrix.</figcaption>
+    </figure>
+
+    <div class="prose reveal d1">
+      <h4>Method</h4>
+      <p>Two public datasets harmonised and pooled to force exposure to hardware and subject variation, segmented into 30-second hyper-windows. Two representations: a channel graph encoding inter-electrode connectivity, and a heterogeneous graph encoding the three relation types. Four graph architectures (GCN, GAT, RGCN, heterogeneous GAT) evaluated against an LSTM baseline plus convolutional, transformer, and classical baselines, under a strict subject-independent 5-fold protocol.</p>
+      <h4>Results</h4>
+      <p>The heterogeneous RGCN performed best among the graph models — accuracy 0.760, ROC-AUC 0.836 — significantly outperforming the LSTM baseline. An edge-type ablation confirmed the three relation types contribute complementary information rather than redundant signal.</p>
+    </div>
+
+    <div class="callout reveal d1">
+      <h4>The result I did not want</h4>
+      <p>A random forest on the same handcrafted features matched the RGCN on accuracy and beat it on ROC-AUC. That is worth stating plainly: on this data, at this scale, the graph architecture did not earn its complexity. The relational structure is real and the ablation shows it carries information — but a well-chosen classical model remained competitive, and any honest reading of the work has to say so.</p>
+    </div>
+
+    <div class="prose reveal d1">
+      <h4>Fairness</h4>
+      <p>A sex-based subgroup analysis found comparable accuracy (male 0.761, female 0.716) but a true-positive-rate gap of 0.131 — a sizeable disparity in who the model actually detects, invisible if you only report accuracy. It is a small illustration of why recall-based fairness metrics matter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="sec" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Experience</div>
+      <h2>Where I have worked</h2>
+    </div>
+    <div class="roles reveal d1">
+      <div class="role-row">
+        <div class="role-main">Data Scientist <span>· <a href="https://acer-trading.com/" target="_blank" rel="noopener">ACER Trading</a></span></div>
+        <div class="role-date">Jan 2026 — Present</div>
+        <div class="role-desc">Built the entire data and analytics function solo: PostgreSQL data model, Python ETL, Metabase dashboards, metric definitions.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Data Scientist <span>· <a href="https://www.linkedin.com/company/snappfood/posts/?feedView=all" target="_blank" rel="noopener">Snappfood</a></span></div>
+        <div class="role-date">Feb 2025 — Jan 2026</div>
+        <div class="role-desc">LLM voice analytics pipeline across four vendor complaint channels; geospatial coverage analysis across ~50,000 vendors in 120 cities.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Data Scientist <span>· <a href="https://www.linkedin.com/company/faratarhsteel/" target="_blank" rel="noopener">Faratrah Steel</a></span></div>
+        <div class="role-date">Mar 2024 — Feb 2025</div>
+        <div class="role-desc">Commodity price forecasting and a customer credit-scoring system, both deployed and running on a recurring schedule.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Intern Data Scientist <span>· <a href="https://www.sheyda.com/" target="_blank" rel="noopener">Sheyda VOD</a></span></div>
+        <div class="role-date">Dec 2023 — Mar 2024</div>
+        <div class="role-desc">Built a content recommendation system and chatbot, applying BERT and transformer models to content matching, integrated before public launch.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Data Science Instructor <span>· <a href="https://www.linkedin.com/school/karyar/" target="_blank" rel="noopener">Karyar College</a></span></div>
+        <div class="role-date">Apr 2023 — Nov 2023</div>
+        <div class="role-desc">Designed and taught a hands-on curriculum: Python, exploratory analysis, and end-to-end ML workflows.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Software Developer <span>· <a href="https://www.linkedin.com/company/nasir-driving-simulator/" target="_blank" rel="noopener">Nasir Driving Simulator</a></span></div>
+        <div class="role-date">Feb 2022 — Mar 2023</div>
+        <div class="role-desc">Built the TCP/UDP socket networking layer carrying real-time data between supervisor and trainee stations.</div>
+      </div>
+      <div class="role-row">
+        <div class="role-main">Teaching Assistant <span>· <a href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University of Technology</a></span></div>
+        <div class="role-date">Oct 2020 — Jan 2022</div>
+        <div class="role-desc">Teaching assistant for programming courses in Python, C++, and MATLAB.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="sec" id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Skills</div>
+      <h2>What I would defend in an interview</h2>
+    </div>
+    <div class="skills reveal d1">
+      <div class="skill-row"><div class="skill-cat">Languages</div><div class="skill-list">Python · SQL</div></div>
+      <div class="skill-row"><div class="skill-cat">Data Engineering</div><div class="skill-list">PostgreSQL · MySQL · ETL · Schema Design</div></div>
+      <div class="skill-row"><div class="skill-cat">Machine Learning</div><div class="skill-list">Scikit-learn · XGBoost · LightGBM · Random Forests · SVM · K-Means · DBSCAN · Logistic &amp; Linear Regression · ARIMA · PCA · SMOTE</div></div>
+      <div class="skill-row"><div class="skill-cat">Deep Learning</div><div class="skill-list">PyTorch · TensorFlow · Keras · PyTorch Geometric · CNNs · RNNs · LSTMs · GRUs · Autoencoders · Transformers · Attention · GNNs (GCN, GAT, RGCN)</div></div>
+      <div class="skill-row"><div class="skill-cat">NLP &amp; LLMs</div><div class="skill-list">HuggingFace · BERT · Sentence Embeddings · LLM Integration · Prompt Engineering · Fine-tuning · RAG</div></div>
+      <div class="skill-row"><div class="skill-cat">Geospatial</div><div class="skill-list">GeoPandas · Shapely · GeoJSON · KML · Spatial Joins · Spatial Clustering</div></div>
+      <div class="skill-row"><div class="skill-cat">Engineering</div><div class="skill-list">Docker · Git · GitHub · CI/CD · Linux · Jupyter</div></div>
+      <div class="skill-row"><div class="skill-cat">Analytics</div><div class="skill-list">Metabase · Dashboard Design · KPI Definition · Stakeholder Reporting</div></div>
+      <div class="skill-row learning"><div class="skill-cat">Currently learning</div><div class="skill-list">MLOps</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="sec" id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Education</div>
+      <h2>Degrees</h2>
+    </div>
+    <div class="edu reveal d1">
+      <div class="edu-item">
+        <div class="edu-deg">M.S. Information Technology Engineering</div>
+        <div class="edu-meta">Tarbiat Modares University · 2023 — 2026</div>
+        <div class="edu-thesis">Detection of Cognitive Activities in EEG Signals Using Graph Neural Networks</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg">B.S. Mechanical Engineering</div>
+        <div class="edu-meta"><a href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University of Technology</a> · 2018 — 2023</div>
+        <div class="edu-thesis">Automated Femur Extraction from X-Ray Images Using Convolutional Neural Networks</div>
+      </div>
+      <p class="honours">
+        <strong>Selected honours</strong> — Top 1% of ~145,000 candidates, national undergraduate entrance examination (2018) · Top 2% of ~15,000 candidates, national graduate entrance examination (2023) · Full tuition scholarship across both degrees.<br>
+        <strong>Languages</strong> — English (IELTS 7.5) · Persian (native) · Kurdish (native).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-label">Contact</div>
+      <h2>Open to Data Scientist roles in the EU</h2>
+    </div>
+    <div class="contact-grid reveal d1">
+      <div class="prose">
+        <p>I require visa sponsorship and I am open to relocation anywhere in Europe.</p>
+        <p>If you are hiring, or you just want to talk about LLM pipelines or graph neural networks, I would like to hear from you.</p>
+        <p style="font-family:var(--mono);font-size:13px;margin-top:28px">
+          <a href="mailto:AminHosseinniya@gmail.com">AminHosseinniya@gmail.com</a>
+        </p>
+      </div>
+      <form class="form-panel" action="https://formspree.io/f/xbdnnlya" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button class="send" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p>© 2026 Amin Hosseinniya</p>
+    <div class="foot-links">
+      <a href="mailto:AminHosseinniya@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/AminHosseinniya" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/AminHosseinniya" target="_blank" rel="noopener">GitHub</a>
+      <a href="/cv.pdf">CV</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- theme: follow system, allow manual override ---------- */
+  var root = document.documentElement;
+  var mq = window.matchMedia('(prefers-color-scheme: light)');
+  var manual = false;
+
+  function setTheme(t){
+    root.setAttribute('data-theme', t);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#08181F' : '#F4F8F9');
+  }
+  setTheme(mq.matches ? 'light' : 'dark');
+  if (mq.addEventListener) {
+    mq.addEventListener('change', function(e){ if(!manual) setTheme(e.matches ? 'light' : 'dark'); });
+  }
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    manual = true;
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---------- scroll reveal ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  var sections = document.querySelectorAll('.sec');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+    sections.forEach(function(s){ s.classList.add('in'); });
+  } else {
+    var revealObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); revealObs.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    reveals.forEach(function(el){ revealObs.observe(el); });
+
+    var secObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) en.target.classList.add('in'); });
+    }, { threshold: 0.05 });
+    sections.forEach(function(s){ secObs.observe(s); });
+  }
+
+  /* ---------- scrollspy: nav chips + background graph node ---------- */
+  var ids = ['about','work','research','experience','skills','education','contact'];
+  var links = {}, nodes = {}, labels = {}, edges = [];
+  ids.forEach(function(id){
+    links[id]  = document.querySelector('#topnav a[href="#' + id + '"]');
+    nodes[id]  = document.getElementById('cn-' + id);
+    labels[id] = document.getElementById('cl-' + id);
+  });
+  for (var i = 0; i < 6; i++) edges.push(document.getElementById('ce-' + i));
+
+  var current = null;
+
+  function clearAll(){
+    ids.forEach(function(k){
+      if (links[k])  links[k].classList.remove('active');
+      if (nodes[k])  nodes[k].classList.remove('active');
+      if (labels[k]) labels[k].classList.remove('active');
+    });
+    edges.forEach(function(e){ if (e) e.classList.remove('lit'); });
+  }
+
+  function centreNav(link){
+    if (!link) return;
+    var nav = document.getElementById('topnav');
+    if (nav.scrollWidth <= nav.clientWidth + 2) return;   /* nothing to scroll */
+    var target = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
+    target = Math.max(0, Math.min(target, nav.scrollWidth - nav.clientWidth));
+    if (Math.abs(target - nav.scrollLeft) < 4) return;
+    if (nav.scrollTo) nav.scrollTo({ left: target, behavior: reduce ? 'auto' : 'smooth' });
+    else nav.scrollLeft = target;
+  }
+
+  function activate(id){
+    if (id === current) return;
+    current = id;
+    if (!id) { clearAll(); return; }
+    ids.forEach(function(k){
+      var on = (k === id);
+      if (links[k])  links[k].classList.toggle('active', on);
+      if (nodes[k])  nodes[k].classList.toggle('active', on);
+      if (labels[k]) labels[k].classList.toggle('active', on);
+    });
+    var idx = ids.indexOf(id);
+    edges.forEach(function(e, n){ if (e) e.classList.toggle('lit', n < idx); });
+    centreNav(links[id]);
+  }
+
+  function spy(){
+    var probe = window.innerHeight * 0.66;
+    var found = null;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) found = id;
+    });
+    activate(found);
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){ spy(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  spy();
+
+  /* re-centre the strip if the viewport changes */
+  window.addEventListener('resize', function(){ centreNav(links[current]); }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
