@@ -7,6 +7,10 @@
 <meta name="description" content="Data Scientist and ML Engineer. I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
 <meta name="theme-color" content="#08181F">
 
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aminhosseinniya.com/">
 <meta property="og:title" content="Amin Hosseinniya — Data Scientist & ML Engineer">
@@ -19,9 +23,33 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+/* ============================================================
+   LOCAL DISPLAY FACE
+   ============================================================ */
+@font-face{
+  font-family:'Louis George Cafe';
+  src:url('assets/fonts/LouisGeorgeCafe-Regular.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'Louis George Cafe';
+  src:url('assets/fonts/LouisGeorgeCafe-Bold.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'Quicksand';
+  src:url('assets/fonts/Quicksand-Book.woff2') format('woff2');
+  font-weight:400 500;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'Quicksand';
+  src:url('assets/fonts/Quicksand-Bold.woff2') format('woff2');
+  font-weight:600 700;font-style:normal;font-display:swap
+}
+
 /* ============================================================
    THEME TOKENS
    ============================================================ */
@@ -60,7 +88,8 @@
   --scrim:rgba(244,248,249,.76);
 }
 :root{
-  --display:'Space Grotesk',system-ui,sans-serif;
+  --display:'Louis George Cafe',system-ui,sans-serif;
+  --ui:'Quicksand',system-ui,sans-serif;
   --body:'Newsreader',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --measure:66ch;
@@ -134,10 +163,10 @@ a{color:var(--accent);text-decoration:none}
 }
 .topbar-inner{display:flex;align-items:center;gap:18px;height:62px}
 .mark{
-  font-family:var(--mono);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;
+  font-family:var(--ui);font-weight:600;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text);white-space:nowrap;flex-shrink:0
 }
-.mark b{color:var(--accent);font-weight:500}
+.mark b{color:var(--accent);font-weight:700}
 .mark{transition:opacity .3s var(--ease)}
 .mark:hover{opacity:.72}
 a.case-org{border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
@@ -148,8 +177,8 @@ a.case-org:hover{border-bottom-color:var(--accent)}
 .topnav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .topnav::-webkit-scrollbar{display:none}
 .topnav a{
-  position:relative;font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;
-  text-transform:uppercase;color:var(--text-3);padding:9px 13px;border-radius:3px;
+  position:relative;font-family:var(--ui);font-weight:600;font-size:13.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--text-3);padding:9px 13px;border-radius:4px;
   white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease)
 }
 .topnav a::after{
@@ -175,7 +204,7 @@ a.case-org:hover{border-bottom-color:var(--accent)}
 
 @media(max-width:900px){
   .topbar-inner{height:auto;flex-wrap:wrap;padding-top:10px;gap:10px}
-  .mark{font-size:11.5px}
+  .mark{font-size:13px}
   .topnav{order:3;width:100%;margin-left:0;padding:8px 0;border-top:1px solid var(--line)}
   .theme-btn{margin-left:auto}
 }
@@ -189,7 +218,7 @@ a.case-org:hover{border-bottom-color:var(--accent)}
    HERO
    ============================================================ */
 .hero{position:relative;z-index:2;border-bottom:1px solid var(--line)}
-.hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:end;padding-top:84px}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;padding-top:84px}
 .hero-copy{padding-bottom:88px}
 .eyebrow{
   display:flex;align-items:center;gap:11px;margin-bottom:22px;
@@ -197,7 +226,7 @@ a.case-org:hover{border-bottom-color:var(--accent)}
 }
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent-2)}
 h1{
-  font-family:var(--display);font-weight:600;letter-spacing:-.03em;
+  font-family:var(--display);font-weight:700;letter-spacing:-.022em;
   font-size:clamp(2.7rem,6.4vw,4.5rem);line-height:1;color:var(--text)
 }
 .role{
@@ -216,19 +245,19 @@ h1{
 .hero-links{display:flex;flex-wrap:wrap;gap:11px;margin-top:32px}
 
 .btn{
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
-  padding:13px 21px;border-radius:4px;border:1px solid var(--line-2);
+  font-family:var(--ui);font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:13px 22px;border-radius:4px;border:1px solid var(--line-2);
   color:var(--text-2);background:var(--bg-2);
   transition:transform .28s var(--ease),color .28s var(--ease),
              border-color .28s var(--ease),box-shadow .28s var(--ease),filter .28s var(--ease)
 }
 .btn:hover{transform:translateY(-2px);color:var(--accent);border-color:var(--accent-2);box-shadow:0 6px 20px var(--accent-glow)}
-.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:500}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
 .btn-solid:hover{color:var(--bg);filter:brightness(1.12)}
 
 .hero-photo{position:relative;display:block;align-self:end;padding-bottom:88px}
 .photo-frame{
-  position:relative;width:100%;max-width:320px;margin:0 auto;
+  position:relative;width:100%;max-width:400px;margin:0 auto;
   aspect-ratio:1/1;             /* the box shape is fixed here, not on the img */
   flex:0 0 auto
 }
@@ -242,7 +271,8 @@ h1{
   position:absolute;inset:0;display:block;width:100%;height:100%;
   object-fit:cover;object-position:50% 34%;
   border-radius:12px;border:1px solid var(--line-2);
-  box-shadow:var(--shadow);filter:saturate(.92) contrast(1.03)
+  box-shadow:var(--shadow);filter:saturate(.92) contrast(1.03);
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease)
 }
 .photo-frame::after{
   content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
@@ -272,16 +302,16 @@ h1{
 }
 .sec.in .sec-head::after{transform:scaleX(1)}
 .sec-label{
-  display:inline-block;margin-bottom:16px;padding:5px 11px;border-radius:3px;
+  display:inline-block;margin-bottom:16px;padding:6px 13px;border-radius:4px;
   background:color-mix(in srgb, var(--accent) 12%, transparent);
   border:1px solid color-mix(in srgb, var(--accent) 28%, transparent);
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)
+  font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)
 }
 h2{
-  font-family:var(--display);font-weight:600;letter-spacing:-.022em;line-height:1.1;
-  font-size:clamp(1.85rem,3.7vw,2.6rem);color:var(--text)
+  font-family:var(--display);font-weight:700;letter-spacing:-.016em;line-height:1.12;
+  font-size:clamp(1.9rem,3.8vw,2.65rem);color:var(--text)
 }
-h3{font-family:var(--display);font-weight:600;font-size:1.18rem;color:var(--text);margin:36px 0 12px}
+h3{font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--text);margin:36px 0 12px}
 h4{
   font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--accent);margin:34px 0 13px
@@ -296,7 +326,7 @@ h4{
 
 .pull{
   margin:30px 0;padding:4px 0 4px 22px;border-left:2px solid var(--brass);
-  font-family:var(--display);font-weight:500;font-size:1.2rem;line-height:1.42;
+  font-family:var(--display);font-weight:700;font-size:1.22rem;line-height:1.45;
   letter-spacing:-.014em;color:var(--accent)
 }
 .note{
@@ -330,8 +360,8 @@ h4{
 .case-org{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .case-when{font-family:var(--mono);font-size:12.5px;color:var(--text-3)}
 .case-title{
-  font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.16;
-  font-size:clamp(1.4rem,2.9vw,1.9rem);margin:0 0 14px;color:var(--text)
+  font-family:var(--display);font-weight:700;letter-spacing:-.015em;line-height:1.18;
+  font-size:clamp(1.42rem,2.9vw,1.92rem);margin:0 0 14px;color:var(--text)
 }
 .case-lede{max-width:var(--measure);margin-bottom:22px;color:var(--text-2)}
 .stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
@@ -351,7 +381,7 @@ h4{
   transition:border-color .35s var(--ease),transform .35s var(--ease)
 }
 .metric:hover{border-color:var(--accent-2);transform:translateY(-2px)}
-.metric-n{font-family:var(--display);font-weight:600;font-size:1.68rem;letter-spacing:-.02em;color:var(--accent);line-height:1.1}
+.metric-n{font-family:var(--display);font-weight:700;font-size:1.68rem;letter-spacing:-.02em;color:var(--accent);line-height:1.1}
 .metric-l{font-family:var(--mono);font-size:12px;line-height:1.55;color:var(--text-3);margin-top:8px}
 
 /* diagrams */
@@ -362,13 +392,13 @@ h4{
 }
 .flow-step:hover{border-color:var(--accent-2);transform:translateY(-2px)}
 .fs-n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--brass)}
-.fs-t{font-family:var(--display);font-weight:600;font-size:.97rem;margin:7px 0 6px;line-height:1.25;color:var(--text)}
+.fs-t{font-family:var(--display);font-weight:700;font-size:.97rem;margin:7px 0 6px;line-height:1.25;color:var(--text)}
 .fs-d{font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--text-3)}
 
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 32px;max-width:var(--measure)}
 @media(max-width:620px){.split{grid-template-columns:1fr}}
 .split-card{background:var(--bg-3);border:1px solid var(--line);border-radius:5px;padding:19px 21px}
-.sc-t{font-family:var(--display);font-weight:600;font-size:1.06rem;color:var(--accent);margin-bottom:7px}
+.sc-t{font-family:var(--display);font-weight:700;font-size:1.06rem;color:var(--accent);margin-bottom:7px}
 .sc-d{font-size:.98rem;line-height:1.55;color:var(--text-2)}
 
 .figure{margin:10px 0 32px;max-width:var(--measure)}
@@ -386,9 +416,9 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--text-3);margin-top
 details.full{margin-top:8px;max-width:var(--measure)}
 details.full > summary{
   list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+  font-family:var(--ui);font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--accent);background:var(--bg-3);border:1px solid var(--line-2);
-  border-radius:4px;padding:12px 19px;
+  border-radius:4px;padding:12px 20px;
   transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)
 }
 details.full > summary::-webkit-details-marker{display:none}
@@ -421,9 +451,9 @@ details.full[open] > summary{margin-bottom:12px}
   border-top-color:var(--line);
   transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)
 }
-.roles .role-row:first-child{border-top-color:transparent}
+.roles .role-row:first-child:not(:hover){border-top-color:transparent}
 .role-row:hover{background:var(--bg-2);border-color:var(--line-2);transform:translateX(4px)}
-.role-main{font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--text)}
+.role-main{font-family:var(--display);font-weight:700;font-size:1.08rem;color:var(--text)}
 .role-main span{font-weight:400;color:var(--accent)}
 .role-date{font-family:var(--mono);font-size:12.5px;color:var(--text-3);white-space:nowrap}
 .role-desc{grid-column:1/-1;font-size:.99rem;line-height:1.6;color:var(--text-2)}
@@ -437,7 +467,7 @@ details.full[open] > summary{margin-bottom:12px}
   border-top-color:var(--line);
   transition:background .3s var(--ease),border-color .3s var(--ease)
 }
-.skills .skill-row:first-child{border-top-color:transparent}
+.skills .skill-row:first-child:not(:hover){border-top-color:transparent}
 .skill-row:hover{background:var(--bg-2);border-color:var(--line-2)}
 .skill-cat{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:4px}
 .skill-list{font-size:1.02rem;line-height:1.8;color:var(--text-2)}
@@ -448,7 +478,7 @@ details.full[open] > summary{margin-bottom:12px}
 .edu{max-width:var(--measure)}
 .edu-item{padding:20px 0;border-bottom:1px solid var(--line)}
 .edu-item:last-of-type{border-bottom:none}
-.edu-deg{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--text)}
+.edu-deg{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--text)}
 .edu-meta{font-family:var(--mono);font-size:12.5px;color:var(--text-3);margin-top:7px}
 .edu-thesis{font-size:.98rem;font-style:italic;color:var(--text-2);margin-top:8px}
 .honours{margin-top:24px;font-size:.99rem;line-height:1.75;color:var(--text-2)}
@@ -459,7 +489,7 @@ details.full[open] > summary{margin-bottom:12px}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:36px}}
 .form-panel{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:26px 28px;box-shadow:var(--shadow)}
 .field{margin-bottom:16px}
-label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:7px}
+label{display:block;font-family:var(--ui);font-weight:600;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:7px}
 input,textarea{
   width:100%;font-family:var(--body);font-size:16px;color:var(--text);
   background:var(--bg-3);border:1px solid var(--line);border-radius:4px;padding:12px 14px;
@@ -468,17 +498,40 @@ input,textarea{
 input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
 textarea{min-height:132px;resize:vertical}
 button.send{
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;
+  font-family:var(--ui);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
   background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:4px;
-  padding:12px 26px;font-weight:500;
+  padding:13px 28px;font-weight:700;
   transition:transform .28s var(--ease),box-shadow .28s var(--ease),filter .28s var(--ease)
 }
 button.send:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 8px 24px var(--accent-glow)}
 
+/* touch devices: no sticky hover states */
+@media (hover:none){
+  .btn:hover,.metric:hover,.flow-step:hover,.role-row:hover,
+  .theme-btn:hover,button.send:hover,details.full > summary:hover{transform:none}
+  details.full > summary:hover{background:var(--bg-3);color:var(--accent)}
+  .photo-frame:hover::before{inset:16px -16px -16px 16px;opacity:.5}
+  .photo-frame:active img{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+}
+
+/* contact form states */
+[hidden]{display:none!important}
+.form-msg{margin-top:14px;margin-bottom:0;font-size:.94rem;color:var(--text-3);min-height:1.3em}
+.form-msg.err{color:var(--brass)}
+.sent{text-align:center;padding:16px 4px 8px}
+.sent-tick{
+  width:54px;height:54px;margin:0 auto 18px;border-radius:50%;
+  display:grid;place-items:center;font-size:25px;line-height:1;
+  color:var(--accent);border:1px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 12%, transparent)
+}
+.sent h4{margin:0 0 10px;color:var(--accent)}
+.sent p{color:var(--text-2);font-size:.99rem;margin-bottom:22px}
+
 /* footer */
 footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:96px;padding:36px 0 50px}
 .foot-inner{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
-.foot-inner p,.foot-inner a{font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.foot-inner p,.foot-inner a{font-family:var(--ui);font-weight:500;font-size:13px;letter-spacing:.03em;color:var(--text-3)}
 .foot-links{display:flex;gap:22px}
 .foot-links a{transition:color .3s var(--ease)}
 .foot-links a:hover{color:var(--accent)}
@@ -524,7 +577,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     <path class="chain-edge" id="ce-5" d="M130 606 L78 706"/>
 
     <circle class="chain-node" id="cn-about" cx="78" cy="90" r="6"/><circle class="chain-halo" cx="78" cy="90" r="6"/>
-    <circle class="chain-node" id="cn-work" cx="128" cy="190" r="6"/><circle class="chain-halo" cx="128" cy="190" r="6"/>
+    <circle class="chain-node" id="cn-projects" cx="128" cy="190" r="6"/><circle class="chain-halo" cx="128" cy="190" r="6"/>
     <circle class="chain-node" id="cn-research" cx="74" cy="296" r="6"/><circle class="chain-halo" cx="74" cy="296" r="6"/>
     <circle class="chain-node" id="cn-experience" cx="134" cy="402" r="6"/><circle class="chain-halo" cx="134" cy="402" r="6"/>
     <circle class="chain-node" id="cn-skills" cx="80" cy="506" r="6"/><circle class="chain-halo" cx="80" cy="506" r="6"/>
@@ -532,7 +585,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     <circle class="chain-node" id="cn-contact" cx="78" cy="706" r="6"/><circle class="chain-halo" cx="78" cy="706" r="6"/>
 
     <text class="chain-label" id="cl-about" x="94" y="94">About</text>
-    <text class="chain-label" id="cl-work" x="144" y="194">Work</text>
+    <text class="chain-label" id="cl-projects" x="144" y="194">Projects</text>
     <text class="chain-label" id="cl-research" x="90" y="300">Research</text>
     <text class="chain-label" id="cl-experience" x="150" y="406">Experience</text>
     <text class="chain-label" id="cl-skills" x="96" y="510">Skills</text>
@@ -547,7 +600,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     <a class="mark" href="https://www.linkedin.com/in/AminHosseinniya" target="_blank" rel="noopener">Amin <b>Hosseinniya</b></a>
     <nav class="topnav" id="topnav">
       <a href="#about">About</a>
-      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
       <a href="#research">Research</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
@@ -597,11 +650,11 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-label">About</div>
-      <h2>I did not set out to do this</h2>
+      <h2>The detour that became the plan</h2>
     </div>
     <div class="prose reveal d1">
-      <p>I started in mechanical engineering at <a class="plain" href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University</a>, and it took about a year to work out that mechanics was not what I wanted to spend a career on.</p>
-      <p>What I had instead was the department itself. Students a year or two ahead of us — some from other fields entirely — ran their own machine learning classes and projects, taught properly and taught free. I went to all of them. That is where I found the thing I actually wanted to do, and by the end I had talked my way into writing a mechanical engineering thesis on convolutional neural networks.</p>
+      <p>I started in mechanical engineering at <a class="plain" href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University</a>. Within a year I had found something I wanted more, and I have been building toward it ever since.</p>
+      <p>What made that possible was the department itself. Students a year or two ahead of us — some from other fields entirely — ran their own machine learning classes and projects, taught properly and taught free. I went to all of them. That is where I found the thing I actually wanted to do, and by the end I had talked my way into writing a mechanical engineering thesis on convolutional neural networks.</p>
       <p>The rest followed from there.</p>
       <p>What I like has stayed consistent since. I like being handed data nobody has structured yet and working out what is genuinely in it. I like questions that come from the business rather than from a dataset. And I like the part most people skip — getting a model out of the notebook and into something people use on a Monday morning.</p>
       <p>I am curious in a way that is occasionally inconvenient. I would rather find a solution to an unsolved problem, or a different solution to a solved one, than apply a known approach cleanly. Mathematics is where I am most comfortable, and it is why graph neural networks appealed to me enough to build a thesis around them.</p>
@@ -609,16 +662,16 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     </div>
     <div class="panel reveal d2" style="margin-top:14px">
       <h4>Why Europe</h4>
-      <p>Honestly, because I want to live there. I travel constantly, I get along with people from anywhere quickly, and I have an ear for languages. It is where I want to build a life, not just a career.</p>
+      <p>Living in Europe has been a plan of mine for a long time — long enough that most of what I have chosen in the last few years points toward it. I travel constantly, I get along with people from anywhere quickly, and I have an ear for languages. It is where I want to build a life, not just a career.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ WORK ============ -->
-<section class="sec" id="work">
+<section class="sec" id="projects">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-label">Selected Work</div>
+      <div class="sec-label">Selected Projects</div>
       <h2>Three systems, and the reasoning behind them</h2>
     </div>
 
@@ -806,26 +859,39 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 
       <h4>Core entities</h4>
       <figure class="figure">
-        <svg viewBox="0 0 700 250" role="img" aria-label="Entity relationship diagram: vendors, contracts, goods, shipments, vessels and trips">
+        <svg viewBox="0 0 700 268" role="img" aria-label="Entity relationship diagram: contracts reference vendors, goods and consignees; each contract has many shipments; each shipment has one vessel">
           <g class="dg-edge">
-            <path d="M130 62 L228 62"/><path d="M310 84 L310 134"/><path d="M388 62 L486 62"/>
-            <path d="M310 84 L444 134"/><path d="M568 84 L568 134"/><path d="M526 160 L524 160"/>
+            <path d="M110 70 L288 112"/>
+            <path d="M350 70 L350 112"/>
+            <path d="M590 70 L412 112"/>
+            <path d="M350 158 L350 202"/>
+            <path d="M182 222 L258 222"/>
           </g>
-          <rect class="dg-box" x="24" y="42" width="106" height="40" rx="4"/>
-          <text class="dg-text" x="77" y="67" text-anchor="middle">vendors</text>
-          <rect class="dg-box dg-box-fill" x="232" y="42" width="156" height="40" rx="4"/>
-          <text class="dg-text-inv" x="310" y="67" text-anchor="middle">contracts</text>
-          <rect class="dg-box" x="490" y="42" width="156" height="40" rx="4"/>
-          <text class="dg-text" x="568" y="67" text-anchor="middle">goods</text>
-          <rect class="dg-box" x="232" y="138" width="156" height="40" rx="4"/>
-          <text class="dg-text" x="310" y="163" text-anchor="middle">shipments</text>
-          <rect class="dg-box" x="400" y="138" width="120" height="40" rx="4"/>
-          <text class="dg-text" x="460" y="163" text-anchor="middle">trips</text>
-          <rect class="dg-box" x="530" y="138" width="120" height="40" rx="4"/>
-          <text class="dg-text" x="590" y="163" text-anchor="middle">vessels</text>
-          <text class="dg-cap" x="350" y="220" text-anchor="middle">many consignees · many currencies · one contract</text>
+
+          <rect class="dg-box" x="40" y="30" width="140" height="40" rx="4"/>
+          <text class="dg-text" x="110" y="55" text-anchor="middle">vendors</text>
+          <rect class="dg-box" x="280" y="30" width="140" height="40" rx="4"/>
+          <text class="dg-text" x="350" y="55" text-anchor="middle">goods</text>
+          <rect class="dg-box" x="520" y="30" width="140" height="40" rx="4"/>
+          <text class="dg-text" x="590" y="55" text-anchor="middle">consignees</text>
+
+          <rect class="dg-box dg-box-fill" x="260" y="112" width="180" height="46" rx="4"/>
+          <text class="dg-text-inv" x="350" y="141" text-anchor="middle">contracts</text>
+
+          <rect class="dg-box" x="260" y="202" width="180" height="44" rx="4"/>
+          <text class="dg-text" x="350" y="230" text-anchor="middle">shipments</text>
+          <rect class="dg-box" x="42" y="202" width="140" height="40" rx="4"/>
+          <text class="dg-text" x="112" y="227" text-anchor="middle">vessels</text>
+
+          <g class="dg-cap">
+            <text x="196" y="86">1</text>
+            <text x="360" y="96">1</text>
+            <text x="492" y="86">1..n</text>
+            <text x="360" y="186">1..n</text>
+            <text x="212" y="214">1</text>
+          </g>
         </svg>
-        <figcaption>The entities were the easy part. The hard part was where the real world refused to be one-to-one.</figcaption>
+        <figcaption>A contract carries one vendor and one good but can name several consignees, and can be denominated in more than one currency. The entities were the easy part; the cardinalities were not.</figcaption>
       </figure>
 
       <p class="pull">A dashboard built on hand-entered data is a faster way to distribute the same errors.</p>
@@ -850,13 +916,13 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
           <p>The instinct is to build the dashboard first, because it is the visible thing and it is what leadership asked for. The dashboard is also worthless if the numbers underneath it are wrong, and worse than worthless once people have begun making decisions on it.</p>
 
           <h4>Modelling the domain</h4>
-          <p>The schema grew to over ten tables in PostgreSQL, built around the entities the business actually runs on: <strong>vessels, vendors, goods, contracts, the shipments belonging to each contract, and the trips a vessel makes.</strong></p>
+          <p>The schema grew to over ten tables in PostgreSQL, built around the entities the business actually runs on: <strong>contracts and the shipments belonging to them, plus the vendors, goods, consignees, and vessels each one references.</strong></p>
           <p>The hard part was not the entities. It was the places where the real world refused to be one-to-one. A contract can have several consignees. A contract can be denominated in several currencies. Every one of these is obvious to a trader and invisible in a naive schema — and each one, modelled wrongly, produces numbers that look plausible and are quietly incorrect.</p>
           <p>Getting these right was most of the modelling work, and finding them meant asking the operations team about cases they considered too routine to mention.</p>
           <p>Data reaches the system three ways: parsed from documents, pulled from national trade and customs reporting, and entered by hand where no other source exists. Reducing that last category is ongoing.</p>
 
           <h4>What people use</h4>
-          <p>Python ETL pipelines feed four Metabase dashboards, used by a twenty-person operations team for vessel tracking, trip-level analytics, and daily trading reports.</p>
+          <p>Python ETL pipelines feed four Metabase dashboards, used by a twenty-person operations team for vessel tracking, shipment-level analytics, and daily trading reports.</p>
           <p>Two of the dashboards are the core: one covering the company's own position, one covering the wider national market it competes in. The other two were built on external sources that have since become unavailable — which is its own lesson. A dashboard is only as durable as the data feeding it, and when you do not own the source, you are one policy change away from losing it. Anything built on external data now gets designed with that assumption.</p>
           <p><strong>I chose Metabase over Power BI or Superset for a reason that had nothing to do with features:</strong> the learning curve is short. I am the only data person here, and I will not always be. A tool that the next person can pick up without training is worth more to this company than one with a longer capability ceiling that leaves with me.</p>
 
@@ -932,8 +998,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     </div>
 
     <div class="callout reveal d1">
-      <h4>The result I did not want</h4>
-      <p>A random forest on the same handcrafted features matched the RGCN on accuracy and beat it on ROC-AUC. That is worth stating plainly: on this data, at this scale, the graph architecture did not earn its complexity. The relational structure is real and the ablation shows it carries information — but a well-chosen classical model remained competitive, and any honest reading of the work has to say so.</p>
+      <h4>The most interesting result</h4>
+      <p>A random forest on the same handcrafted features matched the RGCN on accuracy and beat it on ROC-AUC. That is the finding worth reporting: on this data, at this scale, the graph architecture did not earn its complexity. The relational structure is real, and the ablation shows the three edge types carry complementary information — but knowing exactly where a simpler model still wins is more useful than a result that only confirms what you hoped for.</p>
     </div>
 
     <div class="prose reveal d1">
@@ -1046,27 +1112,36 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     </div>
     <div class="contact-grid reveal d1">
       <div class="prose">
-        <p>I require visa sponsorship and I am open to relocation anywhere in Europe.</p>
+        <p>I require visa sponsorship and I am open to relocation within Europe.</p>
         <p>If you are hiring, or you just want to talk about LLM pipelines or graph neural networks, I would like to hear from you.</p>
         <p style="font-family:var(--mono);font-size:13px;margin-top:28px">
           <a href="mailto:AminHosseinniya@gmail.com">AminHosseinniya@gmail.com</a>
         </p>
       </div>
-      <form class="form-panel" action="https://formspree.io/f/xbdnnlya" method="POST">
-        <div class="field">
-          <label for="name">Your name</label>
-          <input type="text" id="name" name="name" required>
+      <div class="form-panel">
+        <form id="contactForm" action="https://formspree.io/f/xbdnnlya" method="POST">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button class="send" type="submit">Send message</button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </form>
+        <div class="sent" id="sentPanel" hidden>
+          <div class="sent-tick" aria-hidden="true">&#10003;</div>
+          <h4>Message sent</h4>
+          <p>Thanks — it has reached my inbox, and I will reply to the address you gave.</p>
+          <button class="send" type="button" id="sentOk">OK</button>
         </div>
-        <div class="field">
-          <label for="email">Your email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button class="send" type="submit">Send message</button>
-      </form>
+      </div>
     </div>
   </div>
 </section>
@@ -1131,7 +1206,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
   }
 
   /* ---------- scrollspy: nav chips + background graph node ---------- */
-  var ids = ['about','work','research','experience','skills','education','contact'];
+  var ids = ['about','projects','research','experience','skills','education','contact'];
   var links = {}, nodes = {}, labels = {}, edges = [];
   ids.forEach(function(id){
     links[id]  = document.querySelector('#topnav a[href="#' + id + '"]');
@@ -1201,6 +1276,54 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 
   /* re-centre the strip if the viewport changes */
   window.addEventListener('resize', function(){ centreNav(links[current]); }, { passive: true });
+
+  /* ---------- contact form: submit in place, no page change ---------- */
+  var form = document.getElementById('contactForm');
+  var sent = document.getElementById('sentPanel');
+  var msg  = document.getElementById('formMsg');
+
+  if (form && sent && msg && window.fetch) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.textContent = '';
+      msg.classList.remove('err');
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r){
+        if (r.ok) { form.hidden = true; sent.hidden = false; return; }
+        return r.json().then(function(data){
+          var m = data && data.errors
+            ? data.errors.map(function(x){ return x.message; }).join(', ')
+            : 'That did not go through.';
+          throw new Error(m);
+        });
+      })
+      .catch(function(err){
+        msg.textContent = (err && err.message ? err.message : 'Could not send') +
+                          ' - you can also email me directly.';
+        msg.classList.add('err');
+      })
+      .then(function(){
+        btn.disabled = false;
+        btn.textContent = label;
+      });
+    });
+
+    document.getElementById('sentOk').addEventListener('click', function(){
+      form.reset();
+      sent.hidden = true;
+      form.hidden = false;
+      msg.textContent = '';
+    });
+  }
 })();
 </script>
 
