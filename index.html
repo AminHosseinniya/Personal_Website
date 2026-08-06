@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amin Hosseinniya — Data Scientist & ML Engineer</title>
-<meta name="description" content="Data Scientist and ML Engineer. I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<title>Amin Hosseinniya | Data Scientist &amp; ML Engineer</title>
+<meta name="description" content="Data Scientist and ML Engineer. I turn unstructured data into systems people rely on - from LLM pipelines to forecasting models to the infrastructure underneath them.">
 <meta name="theme-color" content="#08181F">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -13,12 +13,12 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aminhosseinniya.com/">
-<meta property="og:title" content="Amin Hosseinniya — Data Scientist & ML Engineer">
-<meta property="og:description" content="I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<meta property="og:title" content="Amin Hosseinniya | Data Scientist &amp; ML Engineer">
+<meta property="og:description" content="I turn unstructured data into systems people rely on - from LLM pipelines to forecasting models to the infrastructure underneath them.">
 <meta property="og:image" content="https://aminhosseinniya.com/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Amin Hosseinniya — Data Scientist & ML Engineer">
-<meta name="twitter:description" content="I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.">
+<meta name="twitter:title" content="Amin Hosseinniya | Data Scientist &amp; ML Engineer">
+<meta name="twitter:description" content="I turn unstructured data into systems people rely on - from LLM pipelines to forecasting models to the infrastructure underneath them.">
 <meta name="twitter:image" content="https://aminhosseinniya.com/assets/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,6 +93,7 @@
   --body:'Newsreader',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --measure:66ch;
+  --bar:62px;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 
@@ -131,8 +132,13 @@ a{color:var(--accent);text-decoration:none}
     radial-gradient(ellipse 72% 58% at 50% 42%, var(--scrim) 0%, transparent 78%),
     linear-gradient(to bottom, transparent 0%, var(--scrim) 52%, var(--scrim) 100%);
 }
-.bg-chain{position:absolute;left:0;top:0;height:100%;width:340px;opacity:.9}
-@media(max-width:1180px){.bg-chain{display:none}}
+.chain-layer{
+  position:fixed;left:0;top:0;width:172px;height:100%;
+  z-index:30;pointer-events:none
+}
+.bg-chain{position:absolute;inset:0;width:100%;height:100%;opacity:.95}
+/* only shown when there is real margin beside the 1120px column */
+@media(max-width:1460px){.chain-layer{display:none}}
 
 .chain-edge{stroke:var(--line-2);stroke-width:1.2;fill:none;transition:stroke .5s var(--ease)}
 .chain-edge.lit{stroke:var(--accent-2)}
@@ -146,10 +152,16 @@ a{color:var(--accent);text-decoration:none}
   100%{opacity:0;transform:scale(2.4)}
 }
 .chain-label{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  fill:var(--text-3);opacity:0;transition:opacity .5s var(--ease),fill .5s var(--ease)
+  font-family:var(--ui);font-weight:600;font-size:12.5px;letter-spacing:.07em;
+  text-transform:uppercase;
+  fill:var(--text-3);opacity:0;transition:opacity .45s var(--ease),fill .45s var(--ease)
 }
 .chain-label.active{opacity:1;fill:var(--accent)}
+.cnode{pointer-events:none}
+.chain-hit{fill:transparent;pointer-events:auto;cursor:pointer}
+.cnode:hover .chain-label{opacity:.62;fill:var(--text-2)}
+.cnode:hover .chain-label.active{opacity:1;fill:var(--accent)}
+.cnode:hover .chain-node{stroke:var(--accent)}
 
 /* ============================================================
    TOP BAR
@@ -203,6 +215,7 @@ a.case-org:hover{border-bottom-color:var(--accent)}
 :root[data-theme="light"] .icon-moon{display:block}
 
 @media(max-width:900px){
+  :root{--bar:96px}
   .topbar-inner{height:auto;flex-wrap:wrap;padding-top:10px;gap:10px}
   .mark{font-size:13px}
   .topnav{order:3;width:100%;margin-left:0;padding:8px 0;border-top:1px solid var(--line)}
@@ -293,16 +306,47 @@ h1{
 /* ============================================================
    SECTIONS
    ============================================================ */
-.sec{position:relative;z-index:2;scroll-margin-top:120px;padding:0 0 20px}
-.sec-head{position:relative;padding:74px 0 34px;margin-bottom:6px}
-.sec-head::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:var(--line)}
-.sec-head::after{
+.sec{position:relative;z-index:2;scroll-margin-top:calc(var(--bar) + 8px);padding:0 0 20px}
+.sec-top{position:relative;margin-top:76px;padding:22px 0 0}
+.sec-top::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:var(--line)}
+.sec-top::after{
   content:"";position:absolute;top:0;left:0;width:64px;height:2px;background:var(--accent);
   transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease) .1s
 }
-.sec.in .sec-head::after{transform:scaleX(1)}
+.sec.in .sec-top::after{transform:scaleX(1)}
+
+/* the in-flow header is static. the compact version that follows you down
+   the page is .minibar, which is position:fixed and therefore has no flow
+   height at all - nothing for the scroll position to feed back into */
+.sec-head{padding:12px 0 18px;margin-bottom:6px}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:20px}
+
+.minibar{
+  position:fixed;left:0;right:0;top:var(--bar);z-index:90;
+  background:color-mix(in srgb, var(--bg) 93%, transparent);
+  backdrop-filter:blur(14px) saturate(1.25);
+  border-bottom:1px solid var(--line);
+  opacity:0;transform:translateY(-12px);pointer-events:none;
+  transition:opacity .3s var(--ease),transform .3s var(--ease)
+}
+.minibar.show{opacity:1;transform:none;pointer-events:auto}
+.minibar-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  max-width:1120px;margin:0 auto;padding:10px 30px
+}
+.mini-title{
+  font-family:var(--display);font-weight:700;letter-spacing:-.015em;
+  font-size:clamp(1.02rem,1.9vw,1.4rem);line-height:1.25;color:var(--text);
+  background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  transition:color .3s var(--ease)
+}
+.mini-title:hover{color:var(--accent)}
+.minibar .sec-fold .chev-wrap{width:32px;height:32px}
+.minibar .chev{width:17px;height:17px;transition:transform .4s var(--ease)}
+.minibar.folded .chev{transform:rotate(-90deg)}
 .sec-label{
-  display:inline-block;margin-bottom:16px;padding:6px 13px;border-radius:4px;
+  display:inline-block;margin-bottom:14px;padding:6px 13px;border-radius:4px;
   background:color-mix(in srgb, var(--accent) 12%, transparent);
   border:1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)
@@ -505,10 +549,58 @@ button.send{
 }
 button.send:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 8px 24px var(--accent-glow)}
 
+/* collapsible sections */
+.sec-jump,.sec-fold{
+  background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer
+}
+.sec-jump{text-align:left;transition:color .3s var(--ease)}
+.sec-jump:hover{color:var(--accent)}
+.sec-fold{display:block;flex-shrink:0;line-height:0}
+.chev-wrap{
+  display:grid;place-items:center;flex-shrink:0;
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line-2);background:var(--bg-2);
+  transition:border-color .3s var(--ease),background .3s var(--ease)
+}
+.sec-fold:hover .chev-wrap{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 14%, transparent)}
+.chev{width:20px;height:20px;color:var(--accent);transition:transform .45s var(--ease)}
+.sec.collapsed .chev{transform:rotate(-90deg)}
+.sec-body{
+  display:grid;grid-template-rows:1fr;
+  transition:grid-template-rows .42s var(--ease),opacity .26s var(--ease)
+}
+.sec-body-inner{overflow:hidden;min-height:0;contain:paint}
+.sec.collapsed .sec-body{grid-template-rows:0fr;opacity:0}
+.sec.collapsed .sec-head{padding-bottom:18px}
+
+/* instrument photos */
+.stills{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;
+  max-width:var(--measure);margin:30px 0 4px
+}
+@media(max-width:560px){.stills{grid-template-columns:1fr;gap:20px}}
+.still{margin:0}
+.shot{
+  position:relative;width:100%;aspect-ratio:4/5;   /* box shape fixed here, not on the img */
+  border-radius:8px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  transition:border-color .35s var(--ease),transform .35s var(--ease)
+}
+.shot img{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  object-fit:cover;filter:saturate(.94)
+}
+.still:hover .shot{border-color:var(--accent-2);transform:translateY(-2px)}
+.still figcaption{
+  font-family:var(--mono);font-size:11.5px;line-height:1.6;
+  color:var(--text-3);margin-top:10px
+}
+
 /* touch devices: no sticky hover states */
 @media (hover:none){
   .btn:hover,.metric:hover,.flow-step:hover,.role-row:hover,
-  .theme-btn:hover,button.send:hover,details.full > summary:hover{transform:none}
+  .theme-btn:hover,button.send:hover,details.full > summary:hover,
+  .still:hover .shot{transform:none}
   details.full > summary:hover{background:var(--bg-3);color:var(--accent)}
   .photo-frame:hover::before{inset:16px -16px -16px 16px;opacity:.5}
   .photo-frame:active img{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
@@ -568,29 +660,51 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 
   <div class="bg-scrim"></div>
 
-  <svg class="bg-chain" viewBox="0 0 340 800" preserveAspectRatio="xMinYMid meet">
-    <path class="chain-edge" id="ce-0" d="M78 90 L128 190"/>
-    <path class="chain-edge" id="ce-1" d="M128 190 L74 296"/>
-    <path class="chain-edge" id="ce-2" d="M74 296 L134 402"/>
-    <path class="chain-edge" id="ce-3" d="M134 402 L80 506"/>
-    <path class="chain-edge" id="ce-4" d="M80 506 L130 606"/>
-    <path class="chain-edge" id="ce-5" d="M130 606 L78 706"/>
+</div>
 
-    <circle class="chain-node" id="cn-about" cx="78" cy="90" r="6"/><circle class="chain-halo" cx="78" cy="90" r="6"/>
-    <circle class="chain-node" id="cn-projects" cx="128" cy="190" r="6"/><circle class="chain-halo" cx="128" cy="190" r="6"/>
-    <circle class="chain-node" id="cn-research" cx="74" cy="296" r="6"/><circle class="chain-halo" cx="74" cy="296" r="6"/>
-    <circle class="chain-node" id="cn-experience" cx="134" cy="402" r="6"/><circle class="chain-halo" cx="134" cy="402" r="6"/>
-    <circle class="chain-node" id="cn-skills" cx="80" cy="506" r="6"/><circle class="chain-halo" cx="80" cy="506" r="6"/>
-    <circle class="chain-node" id="cn-education" cx="130" cy="606" r="6"/><circle class="chain-halo" cx="130" cy="606" r="6"/>
-    <circle class="chain-node" id="cn-contact" cx="78" cy="706" r="6"/><circle class="chain-halo" cx="78" cy="706" r="6"/>
-
-    <text class="chain-label" id="cl-about" x="94" y="94">About</text>
-    <text class="chain-label" id="cl-projects" x="144" y="194">Projects</text>
-    <text class="chain-label" id="cl-research" x="90" y="300">Research</text>
-    <text class="chain-label" id="cl-experience" x="150" y="406">Experience</text>
-    <text class="chain-label" id="cl-skills" x="96" y="510">Skills</text>
-    <text class="chain-label" id="cl-education" x="146" y="610">Education</text>
-    <text class="chain-label" id="cl-contact" x="94" y="710">Contact</text>
+<div class="chain-layer">
+  <svg class="bg-chain" viewBox="0 0 172 800" preserveAspectRatio="xMinYMid meet" role="navigation" aria-label="Section guide">
+    <path class="chain-edge" id="ce-0" d="M22 58 L60 170"/>
+    <path class="chain-edge" id="ce-1" d="M60 170 L20 282"/>
+    <path class="chain-edge" id="ce-2" d="M20 282 L64 394"/>
+    <path class="chain-edge" id="ce-3" d="M64 394 L24 506"/>
+    <path class="chain-edge" id="ce-4" d="M24 506 L58 618"/>
+    <path class="chain-edge" id="ce-5" d="M58 618 L22 730"/>
+    <g class="cnode" data-target="about">
+      <circle class="chain-node" id="cn-about" cx="22" cy="58" r="6"/><circle class="chain-halo" cx="22" cy="58" r="6"/>
+      <text class="chain-label" id="cl-about" x="38" y="62">About</text>
+      <circle class="chain-hit" cx="22" cy="58" r="20"><title>About</title></circle>
+    </g>
+    <g class="cnode" data-target="projects">
+      <circle class="chain-node" id="cn-projects" cx="60" cy="170" r="6"/><circle class="chain-halo" cx="60" cy="170" r="6"/>
+      <text class="chain-label" id="cl-projects" x="76" y="174">Projects</text>
+      <circle class="chain-hit" cx="60" cy="170" r="20"><title>Projects</title></circle>
+    </g>
+    <g class="cnode" data-target="research">
+      <circle class="chain-node" id="cn-research" cx="20" cy="282" r="6"/><circle class="chain-halo" cx="20" cy="282" r="6"/>
+      <text class="chain-label" id="cl-research" x="36" y="286">Research</text>
+      <circle class="chain-hit" cx="20" cy="282" r="20"><title>Research</title></circle>
+    </g>
+    <g class="cnode" data-target="experience">
+      <circle class="chain-node" id="cn-experience" cx="64" cy="394" r="6"/><circle class="chain-halo" cx="64" cy="394" r="6"/>
+      <text class="chain-label" id="cl-experience" x="80" y="398">Experience</text>
+      <circle class="chain-hit" cx="64" cy="394" r="20"><title>Experience</title></circle>
+    </g>
+    <g class="cnode" data-target="skills">
+      <circle class="chain-node" id="cn-skills" cx="24" cy="506" r="6"/><circle class="chain-halo" cx="24" cy="506" r="6"/>
+      <text class="chain-label" id="cl-skills" x="40" y="510">Skills</text>
+      <circle class="chain-hit" cx="24" cy="506" r="20"><title>Skills</title></circle>
+    </g>
+    <g class="cnode" data-target="education">
+      <circle class="chain-node" id="cn-education" cx="58" cy="618" r="6"/><circle class="chain-halo" cx="58" cy="618" r="6"/>
+      <text class="chain-label" id="cl-education" x="74" y="622">Education</text>
+      <circle class="chain-hit" cx="58" cy="618" r="20"><title>Education</title></circle>
+    </g>
+    <g class="cnode" data-target="contact">
+      <circle class="chain-node" id="cn-contact" cx="22" cy="730" r="6"/><circle class="chain-halo" cx="22" cy="730" r="6"/>
+      <text class="chain-label" id="cl-contact" x="38" y="734">Contact</text>
+      <circle class="chain-hit" cx="22" cy="730" r="20"><title>Contact</title></circle>
+    </g>
   </svg>
 </div>
 
@@ -619,6 +733,16 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
   </div>
 </header>
 
+<!-- ============ COMPACT SECTION BAR ============ -->
+<div class="minibar" id="minibar">
+  <div class="minibar-inner">
+    <button class="mini-title" id="miniTitle"></button>
+    <button class="sec-fold" id="miniFold" aria-label="Collapse or expand this section">
+      <span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+  </div>
+</div>
+
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="wrap hero-inner">
@@ -626,13 +750,13 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
       <div class="eyebrow">Data Scientist &nbsp;·&nbsp; ML Engineer</div>
       <h1>Amin<br>Hosseinniya</h1>
       <div class="role">Five years across commodity trading, food-tech &amp; industry</div>
-      <p class="lede">I turn unstructured data into systems people rely on — from LLM pipelines to forecasting models to the infrastructure underneath them.</p>
+      <p class="lede">I turn unstructured data into systems people rely on - from LLM pipelines to forecasting models to the infrastructure underneath them.</p>
       <p class="avail">Open to Data Scientist roles across Europe.<br>I require visa sponsorship.</p>
       <div class="hero-links">
-        <a class="btn btn-solid" href="mailto:AminHosseinniya@gmail.com">Email me</a>
+        <a class="btn btn-solid" href="/cv.pdf">Download CV</a>
+        <a class="btn" href="mailto:AminHosseinniya@gmail.com">Email me</a>
         <a class="btn" href="https://www.linkedin.com/in/AminHosseinniya" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/AminHosseinniya" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="/cv.pdf">Download CV</a>
       </div>
     </div>
     <div class="hero-photo">
@@ -648,40 +772,62 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 <!-- ============ ABOUT ============ -->
 <section class="sec" id="about">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">About</div>
-      <h2>The detour that became the plan</h2>
     </div>
-    <div class="prose reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="about">The detour that became the plan</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-about" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-about"><div class="sec-body-inner">    <div class="prose reveal d1">
       <p>I started in mechanical engineering at <a class="plain" href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University</a>. Within a year I had found something I wanted more, and I have been building toward it ever since.</p>
-      <p>What made that possible was the department itself. Students a year or two ahead of us — some from other fields entirely — ran their own machine learning classes and projects, taught properly and taught free. I went to all of them. That is where I found the thing I actually wanted to do, and by the end I had talked my way into writing a mechanical engineering thesis on convolutional neural networks.</p>
+      <p>What made that possible was the department itself. Students a year or two ahead of us - some from other fields entirely - ran their own machine learning classes and projects, taught properly and taught free. I went to all of them. That is where I found the thing I actually wanted to do, and by the end I had talked my way into writing a mechanical engineering thesis on convolutional neural networks.</p>
       <p>The rest followed from there.</p>
-      <p>What I like has stayed consistent since. I like being handed data nobody has structured yet and working out what is genuinely in it. I like questions that come from the business rather than from a dataset. And I like the part most people skip — getting a model out of the notebook and into something people use on a Monday morning.</p>
+      <p>What I like has stayed consistent since. I like being handed data nobody has structured yet and working out what is genuinely in it. I like questions that come from the business rather than from a dataset. And I like the part most people skip - getting a model out of the notebook and into something people use on a Monday morning.</p>
+      <p>Machine learning and deep learning are where I spend most of my time. That covers a wide span in practice - gradient boosting and time-series models on a forecasting problem, transformers and large language models on unstructured text, graph neural networks on EEG signals - and I care less about which family a method belongs to than about whether it is the right one for the data in front of me.</p>
       <p>I am curious in a way that is occasionally inconvenient. I would rather find a solution to an unsolved problem, or a different solution to a solved one, than apply a known approach cleanly. Mathematics is where I am most comfortable, and it is why graph neural networks appealed to me enough to build a thesis around them.</p>
-      <p>Outside work: I play daf and setar, and I teach daf. I co-founded a podcast. I hike, and I lose at chess with some regularity.</p>
+      <p>Outside work: I play daf and setar, and I teach daf. I co-founded a podcast. I hike, and I lose at chess with some regularity!</p>
     </div>
-    <div class="panel reveal d2" style="margin-top:14px">
+    <div class="stills reveal d2">
+      <figure class="still">
+        <div class="shot"><img src="assets/daf.jpg" alt="Amin playing the daf on a hillside" width="720" height="900" loading="lazy"></div>
+        <figcaption>Daf. This is the one I teach.</figcaption>
+      </figure>
+      <figure class="still">
+        <div class="shot"><img src="assets/setar.jpg" alt="Amin playing the setar" width="720" height="900" loading="lazy"></div>
+        <figcaption>Setar. Still very much learning this one.</figcaption>
+      </figure>
+    </div>
+    <div class="panel reveal d2" style="margin-top:24px">
       <h4>Why Europe</h4>
-      <p>Living in Europe has been a plan of mine for a long time — long enough that most of what I have chosen in the last few years points toward it. I travel constantly, I get along with people from anywhere quickly, and I have an ear for languages. It is where I want to build a life, not just a career.</p>
+      <p>Living in Europe has been a plan of mine for a long time - long enough that most of what I have chosen in the last few years points toward it. I travel constantly, I get along with people from anywhere quickly, and I have an ear for languages. It is where I want to build a life, not just a career.</p>
     </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ WORK ============ -->
 <section class="sec" id="projects">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Selected Projects</div>
-      <h2>Three systems, and the reasoning behind them</h2>
     </div>
-
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="projects">Three systems, and the reasoning behind them</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-projects" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-projects"><div class="sec-body-inner">
     <article class="case reveal d1">
       <div class="case-head">
         <a class="case-org" href="https://www.linkedin.com/company/snappfood/posts/?feedView=all" target="_blank" rel="noopener">Snappfood</a>
-        <span class="case-when">Data Scientist · Feb 2025 – Jan 2026</span>
+        <span class="case-when">Data Scientist · Feb 2025 - Jan 2026</span>
       </div>
       <h3 class="case-title">Turning 500 hours of phone calls into a measurable signal</h3>
-      <p class="case-lede">An LLM pipeline that converted ~6,000 monthly vendor calls in Persian into structured, countable complaint data — at a company that had complaint records everywhere and no way to read them together.</p>
+      <p class="case-lede">An LLM pipeline that converted ~6,000 monthly vendor calls in Persian into structured, countable complaint data - at a company that had complaint records everywhere and no way to read them together.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">Gemini API</span><span class="chip">OpenAI API</span>
         <span class="chip">LLaMA</span><span class="chip">PostgreSQL</span><span class="chip">ETL</span>
@@ -710,11 +856,11 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
           <p>Snappfood is the largest food delivery platform in its market, and it runs on its vendors. When vendors are unhappy, they leave.</p>
           <p>The company already collected complaints. It had a ticketing system, a social media presence, and a complaints channel inside the vendor-side app. What it did not have was any way to look at that data as a whole. Nobody could answer which problem was the most common, whether a given problem was getting better or worse, or which team's backlog was actually hurting vendors most. Tickets went to the responsible team and disappeared into it.</p>
           <p>The failure mode was visible from the outside: vendors would call and say they had filed the same ticket several times and nothing had changed. Individually, every ticket had been routed correctly. Collectively, nobody was watching.</p>
-          <p>For that cycle, the Commercial Planning team was given a single mission — raise vendor satisfaction. You cannot raise a number you are not measuring, so the first problem was measurement.</p>
+          <p>For that cycle, the Commercial Planning team was given a single mission - raise vendor satisfaction. You cannot raise a number you are not measuring, so the first problem was measurement.</p>
 
           <h4>The scale</h4>
           <p>To get a direct signal, five promoters began calling vendors: roughly 120 calls each per day, around 6,000 calls a month, each two to seven minutes long. About <strong>500 hours of Persian-language audio every month</strong>.</p>
-          <p>That volume is the whole problem. Five hundred hours is far past what any team can listen to, and listening is only step one — someone then has to decide what each call was actually about and count it consistently against every other call. Done by hand, the analysis would have finished long after the cycle it was meant to inform.</p>
+          <p>That volume is the whole problem. Five hundred hours is far past what any team can listen to, and listening is only step one - someone then has to decide what each call was actually about and count it consistently against every other call. Done by hand, the analysis would have finished long after the cycle it was meant to inform.</p>
 
           <h4>What made it hard</h4>
           <ul>
@@ -728,36 +874,36 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
           <h4>Approach</h4>
           <p>The obvious design is one model, one prompt: audio in, structured complaints out. I tested that and rejected it. Asking a single model to transcribe noisy Persian audio, separate speakers, identify multiple distinct complaints, normalise colloquial speech, and classify each one pushes every weakness at once, and when the output is wrong there is no way to tell which part failed.</p>
           <p>Splitting the work into stages meant each stage could be evaluated on its own, each stage could use whichever provider was actually best at that specific task, and later stages could correct errors introduced by earlier ones. A messy transcription is recoverable if a subsequent stage is explicitly responsible for cleaning it. Inside one prompt, it is not.</p>
-          <p><strong>Provider selection was benchmarked, not assumed.</strong> I built a fixed sample of around 50 calls and ran it through each candidate at each stage — hosted models from multiple providers alongside locally-hosted open models — then selected per stage on measured performance rather than picking one vendor for the whole pipeline. The models that won differed by stage, which is precisely why routing per stage was worth the added complexity.</p>
+          <p><strong>Provider selection was benchmarked, not assumed.</strong> I built a fixed sample of around 50 calls and ran it through each candidate at each stage - hosted models from multiple providers alongside locally-hosted open models - then selected per stage on measured performance rather than picking one vendor for the whole pipeline. The models that won differed by stage, which is precisely why routing per stage was worth the added complexity.</p>
           <p>Splitting a call into complaint units before extraction matters more than it looks. It is what makes the output countable: one call with three problems becomes three rows, not one blurred summary, so the same call can register against three different owning teams.</p>
 
           <h4>Data model</h4>
-          <p>The pipeline fed a schema I designed from scratch: one table per complaint source — ticketing system, social media, promoter calls, in-app vendor reports — plus a unified table consolidating all four into a common structure, plus metadata tables.</p>
+          <p>The pipeline fed a schema I designed from scratch: one table per complaint source - ticketing system, social media, promoter calls, in-app vendor reports - plus a unified table consolidating all four into a common structure, plus metadata tables.</p>
           <p>The unification is the point. A complaint raised by phone and the same complaint raised through the app previously lived in unrelated systems and were never counted together. Bringing them into one structure was what turned four disconnected streams into a single measurable signal.</p>
 
           <h4>What I rejected, and why</h4>
           <ul>
-            <li><strong>One model for the entire pipeline</strong> — worse results and higher cost than routing per stage.</li>
-            <li><strong>End-to-end in a single prompt</strong> — not feasible; model limitations surfaced immediately and failures were undiagnosable.</li>
-            <li><strong>Fine-tuning a dedicated model</strong> — no labelled Persian data existed, and building a corpus would have consumed the cycle the project was meant to inform.</li>
-            <li><strong>Classical NLP</strong> — keyword and rule-based approaches could not handle unstructured conversational Persian with implicit, mis-attributed complaints.</li>
+            <li><strong>One model for the entire pipeline</strong> - worse results and higher cost than routing per stage.</li>
+            <li><strong>End-to-end in a single prompt</strong> - not feasible; model limitations surfaced immediately and failures were undiagnosable.</li>
+            <li><strong>Fine-tuning a dedicated model</strong> - no labelled Persian data existed, and building a corpus would have consumed the cycle the project was meant to inform.</li>
+            <li><strong>Classical NLP</strong> - keyword and rule-based approaches could not handle unstructured conversational Persian with implicit, mis-attributed complaints.</li>
           </ul>
 
           <h4>Failure handling</h4>
-          <p>Unusable audio was tagged as such rather than silently dropped, as were segments too unclear to interpret — so the gap stayed visible in the data instead of quietly biasing it. Calls containing no complaint were a normal outcome, not an error, and were recorded as satisfied.</p>
+          <p>Unusable audio was tagged as such rather than silently dropped, as were segments too unclear to interpret - so the gap stayed visible in the data instead of quietly biasing it. Calls containing no complaint were a normal outcome, not an error, and were recorded as satisfied.</p>
 
           <h4>Validation and operation</h4>
-          <p>I manually spot-checked over 100 calls end to end against pipeline output. This is not a formal evaluation set — there was no ground truth to build one from — and I would describe it as exactly what it was: enough to establish that the extraction was reliable, not enough to put a precision figure on it.</p>
+          <p>I manually spot-checked over 100 calls end to end against pipeline output. This is not a formal evaluation set - there was no ground truth to build one from - and I would describe it as exactly what it was: enough to establish that the extraction was reliable, not enough to put a precision figure on it.</p>
           <p>The pipeline was written as parameterised stages and run on a weekly cadence.</p>
 
           <h4>Outcome</h4>
-          <p>Complaint processing time dropped by roughly 80% against the manual baseline — an estimate from the team lead comparing the new process to what the work had previously required, not an instrumented measurement.</p>
+          <p>Complaint processing time dropped by roughly 80% against the manual baseline - an estimate from the team lead comparing the new process to what the work had previously required, not an instrumented measurement.</p>
           <p>The more important change was categorical rather than incremental. <strong>The business could see vendor satisfaction as a continuous, decomposed signal for the first time.</strong> Complaint volume by issue, by owning team, and by month became something you could look up rather than something you had to guess at, and fix prioritisation moved onto that basis.</p>
-          <p>What surprised me was how responsive the signal turned out to be. When the business acted on a problem area, the complaint data moved in the expected direction within months. That is the outcome you hope for and still do not expect to see so clearly — it meant the pipeline was not just producing plausible output, it was tracking reality closely enough to function as a feedback loop.</p>
+          <p>What surprised me was how responsive the signal turned out to be. When the business acted on a problem area, the complaint data moved in the expected direction within months. That is the outcome you hope for and still do not expect to see so clearly - it meant the pipeline was not just producing plausible output, it was tracking reality closely enough to function as a feedback loop.</p>
           <p>The system was handed over to my successor when I left.</p>
 
           <h4>What I would do differently</h4>
-          <p>I designed the full schema — all four sources, unified table, metadata — before any of it had processed real data. It worked, but it was a bet.</p>
+          <p>I designed the full schema - all four sources, unified table, metadata - before any of it had processed real data. It worked, but it was a bet.</p>
           <p>I would build for one source first, run it end to end, break it, fix it, and only then generalise the structure to the rest. The cost of finding a modelling mistake after four sources are built on top of it is far higher than the cost of building the fourth source twice.</p>
 
           <p class="note">Under NDA, this write-up describes the system's architecture and process only. Specific findings, complaint categories, and satisfaction metrics are omitted. *The ~80% figure is a team lead's estimate against the manual baseline, not an instrumented measurement.</p>
@@ -768,10 +914,10 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     <article class="case reveal d1">
       <div class="case-head">
         <a class="case-org" href="https://www.linkedin.com/company/faratarhsteel/" target="_blank" rel="noopener">Faratrah Steel</a>
-        <span class="case-when">Data Scientist · Mar 2024 – Feb 2025</span>
+        <span class="case-when">Data Scientist · Mar 2024 - Feb 2025</span>
       </div>
       <h3 class="case-title">Replacing intuition with systems</h3>
-      <p class="case-lede">Two separate projects, alike in nothing but subject matter. Both replaced a decision being made on gut feel — in one case by the planning team, in the other by the CEO — with something the business could inspect, question, and rely on.</p>
+      <p class="case-lede">Two separate projects, alike in nothing but subject matter. Both replaced a decision being made on gut feel - in one case by the planning team, in the other by the CEO - with something the business could inspect, question, and rely on.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">XGBoost</span><span class="chip">ARIMA</span>
         <span class="chip">PostgreSQL</span><span class="chip">Time Series</span><span class="chip">Credit Risk</span>
@@ -793,28 +939,28 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
       <details class="full">
         <summary><span class="caret">▸</span> Read the full case study</summary>
         <div class="full-body prose">
-          <h3>Part One — Forecasting competitor prices</h3>
+          <h3>Part One - Forecasting competitor prices</h3>
 
           <h4>The problem</h4>
           <p>The company sells steel through the national commodity exchange. On offer day, every supplier announces the price at which they will sell. Buyers then choose.</p>
-          <p>That makes pricing a bet with a narrow window. Price too high and competitors take the trade. Price too low and you win the trade and lose the margin. The planning team had to make that call for each offer, and what would have made it easy — knowing what everyone else was about to announce — was exactly what nobody knew.</p>
+          <p>That makes pricing a bet with a narrow window. Price too high and competitors take the trade. Price too low and you win the trade and lose the margin. The planning team had to make that call for each offer, and what would have made it easy - knowing what everyone else was about to announce - was exactly what nobody knew.</p>
           <p>So the question was direct: <strong>what price will each competing supplier announce this week?</strong></p>
 
           <h4>Why the existing model wasn't used</h4>
           <p>A forecasting model already existed. It was deployed, it was monitored, and it carried roughly <strong>38% mean absolute error</strong>.</p>
-          <p>At that error level, a forecast is not a weak signal — it is noise wearing the costume of information. It was accurate enough to be usable for a handful of the most predictable suppliers and useless for the rest, which meant it could not be trusted as a system. The planning team did the rational thing and ignored it, pricing on experience and instinct instead.</p>
+          <p>At that error level, a forecast is not a weak signal - it is noise wearing the costume of information. It was accurate enough to be usable for a handful of the most predictable suppliers and useless for the rest, which meant it could not be trusted as a system. The planning team did the rational thing and ignored it, pricing on experience and instinct instead.</p>
           <p>This is the part worth sitting with. Rebuilding it meant not just improving accuracy but clearing the accumulated evidence that this kind of thing does not work here.</p>
 
           <h4>Approach</h4>
-          <p>I built the model on four years of national exchange history: demand, traded quantities, the set of participating companies, and time-based features, enriched with foreign exchange rates — because in an import-exposed market, currency movement drives input costs and therefore pricing behaviour.</p>
+          <p>I built the model on four years of national exchange history: demand, traded quantities, the set of participating companies, and time-based features, enriched with foreign exchange rates - because in an import-exposed market, currency movement drives input costs and therefore pricing behaviour.</p>
           <p><strong>The final model combined XGBoost and ARIMA, because they failed in different places.</strong> Neither was better everywhere, so choosing one meant accepting known weakness across half the forecast range.</p>
-          <p><strong>What did not work:</strong> LSTM and plain regression. The LSTM is the interesting failure — a deep sequence model on four years of weekly observations is a model with far more capacity than the data can constrain. It fit and it did not generalise. Regression failed in the opposite direction, too rigid for a series with this much nonlinear interaction between demand, participation, and currency.</p>
+          <p><strong>What did not work:</strong> LSTM and plain regression. The LSTM is the interesting failure - a deep sequence model on four years of weekly observations is a model with far more capacity than the data can constrain. It fit and it did not generalise. Regression failed in the opposite direction, too rigid for a series with this much nonlinear interaction between demand, participation, and currency.</p>
 
           <h4>Outcome</h4>
-          <p><strong>Mean absolute error fell from roughly 38% to under 20%</strong> — a reduction of 18.5 percentage points against the legacy model on the same evaluation.</p>
-          <p>More usefully: the forecast crossed the line from noise into something the planning and supply teams actually priced against. The model ran in Python against the company database on a weekly cycle — once suppliers announced their base prices, the feature set completed and the forecast generated automatically. A failure surfaced as a failed database job rather than a silently stale number, which matters when someone is about to make a pricing decision on the output.</p>
+          <p><strong>Mean absolute error fell from roughly 38% to under 20%</strong> - a reduction of 18.5 percentage points against the legacy model on the same evaluation.</p>
+          <p>More usefully: the forecast crossed the line from noise into something the planning and supply teams actually priced against. The model ran in Python against the company database on a weekly cycle - once suppliers announced their base prices, the feature set completed and the forecast generated automatically. A failure surfaced as a failed database job rather than a silently stale number, which matters when someone is about to make a pricing decision on the output.</p>
 
-          <h3>Part Two — A credit scoring system</h3>
+          <h3>Part Two - A credit scoring system</h3>
 
           <h4>The problem</h4>
           <p>The company extended trade credit to its customers. The decision of who received it, and how much, was made by the CEO, based on his own knowledge of each customer and how they had behaved historically.</p>
@@ -822,18 +968,18 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
           <p>Around 300 customers, and roughly $1M of credit exposure the business could absorb.</p>
 
           <h4>Approach</h4>
-          <p>I structured the scoring around the <strong>5C credit framework</strong> — character, capacity, capital, collateral, conditions — rather than inventing a scoring scheme from scratch. That choice was as much about adoption as about modelling. A finance team can interrogate a framework they already recognise, and a model nobody in finance can argue with is a model nobody in finance will use.</p>
-          <p>Inputs came from two directions: financial reports and actual payment behaviour, alongside firmographic signals — production capacity, assets, company size.</p>
+          <p>I structured the scoring around the <strong>5C credit framework</strong> - character, capacity, capital, collateral, conditions - rather than inventing a scoring scheme from scratch. That choice was as much about adoption as about modelling. A finance team can interrogate a framework they already recognise, and a model nobody in finance can argue with is a model nobody in finance will use.</p>
+          <p>Inputs came from two directions: financial reports and actual payment behaviour, alongside firmographic signals - production capacity, assets, company size.</p>
           <p>The tiers were <strong>not</strong> a modelling output. The model produced a continuous score; the six tiers, from full credit eligibility down to no credit, were drawn by the business. Where the cut points fall is a question about risk appetite, and risk appetite belongs to the people carrying the risk.</p>
 
           <h4>Earning trust</h4>
           <p>The validation that mattered was not the technical one, though historical data and known defaults gave us that.</p>
           <p>It was this: we scored the existing customer base and showed that the customers who had held credit for years, on the CEO's own judgement, scored highly under the model. <strong>The system agreed with the expert where the expert was confident.</strong></p>
-          <p>That reframed the entire conversation. The model was no longer a machine proposing to overrule a person — it was a formalisation of reasoning the business already trusted, extended consistently to customers nobody had time to assess that carefully. The disagreements then became worth examining rather than worth resisting.</p>
+          <p>That reframed the entire conversation. The model was no longer a machine proposing to overrule a person - it was a formalisation of reasoning the business already trusted, extended consistently to customers nobody had time to assess that carefully. The disagreements then became worth examining rather than worth resisting.</p>
           <p>The pipeline ran monthly against fresh data from the finance team, replacing an opaque process with a documented and repeatable one.</p>
 
           <h4>What I would do differently</h4>
-          <p>I would use fewer features. The firmographic signals — size, capacity, assets — carried far less weight than actual financial behaviour, and in hindsight they mostly added surface area. How a customer has paid is a sharper predictor of how they will pay than how large they are. A leaner model would have been easier to explain, easier to maintain, and probably no less accurate.</p>
+          <p>I would use fewer features. The firmographic signals - size, capacity, assets - carried far less weight than actual financial behaviour, and in hindsight they mostly added surface area. How a customer has paid is a sharper predictor of how they will pay than how large they are. A leaner model would have been easier to explain, easier to maintain, and probably no less accurate.</p>
 
           <p class="note">Financial data is confidential. This write-up describes methodology and outcomes only; no customer data, scores, or commercial figures are disclosed.</p>
         </div>
@@ -843,7 +989,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
     <article class="case reveal d1">
       <div class="case-head">
         <a class="case-org" href="https://acer-trading.com/" target="_blank" rel="noopener">ACER Trading</a>
-        <span class="case-when">Data Scientist · Jan 2026 – Present</span>
+        <span class="case-when">Data Scientist · Jan 2026 - Present</span>
       </div>
       <h3 class="case-title">Building a data function from nothing</h3>
       <p class="case-lede">On day one the analytics function was a fortnightly PDF and a folder of spreadsheets. It is now a data model, automated pipelines, defined metrics, and twenty people making daily decisions on numbers they can trace.</p>
@@ -902,13 +1048,13 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
           <h4>Day one</h4>
           <p>A commodity trading company. Vessels arrive, goods clear, contracts settle, money moves.</p>
           <p>What existed as "data" on my first day: a PDF, delivered every two weeks, reporting national import figures for the commodity. And a set of Excel files holding the company's own trading history.</p>
-          <p>That was the analytics function. Not a bad one — the actual one. Everything else lived in the heads of the people doing the work, and in documents that had to be read one at a time by someone who already knew what they were looking for.</p>
+          <p>That was the analytics function. Not a bad one - the actual one. Everything else lived in the heads of the people doing the work, and in documents that had to be read one at a time by someone who already knew what they were looking for.</p>
           <p>I was hired as the only data person, which meant the first question was not <em>what should I build</em> but <em>what should I build first</em>.</p>
 
           <h4>Sequencing</h4>
           <p>With no data function at all, everything is urgent and nothing is prioritised for you. I worked in four stages, and the order was the decision:</p>
           <ul>
-            <li><strong>Find out what each source actually contains.</strong> Not what it is called or what people believe it holds — what is genuinely in it, field by field. This is unglamorous and it is where most of the surprises are.</li>
+            <li><strong>Find out what each source actually contains.</strong> Not what it is called or what people believe it holds - what is genuinely in it, field by field. This is unglamorous and it is where most of the surprises are.</li>
             <li><strong>Clean each dataset.</strong> Establish what a valid record looks like before anything downstream depends on it.</li>
             <li><strong>Automate the manual steps that feed the data.</strong> This came <em>before</em> the dashboards, deliberately. Removing the manual step removes the error class, and it is much cheaper to do before people have started trusting the output.</li>
             <li><strong>Then model, load, and visualise.</strong> Only once the inputs were reliable.</li>
@@ -917,19 +1063,19 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 
           <h4>Modelling the domain</h4>
           <p>The schema grew to over ten tables in PostgreSQL, built around the entities the business actually runs on: <strong>contracts and the shipments belonging to them, plus the vendors, goods, consignees, and vessels each one references.</strong></p>
-          <p>The hard part was not the entities. It was the places where the real world refused to be one-to-one. A contract can have several consignees. A contract can be denominated in several currencies. Every one of these is obvious to a trader and invisible in a naive schema — and each one, modelled wrongly, produces numbers that look plausible and are quietly incorrect.</p>
+          <p>The hard part was not the entities. It was the places where the real world refused to be one-to-one. A contract can have several consignees. A contract can be denominated in several currencies. Every one of these is obvious to a trader and invisible in a naive schema - and each one, modelled wrongly, produces numbers that look plausible and are quietly incorrect.</p>
           <p>Getting these right was most of the modelling work, and finding them meant asking the operations team about cases they considered too routine to mention.</p>
           <p>Data reaches the system three ways: parsed from documents, pulled from national trade and customs reporting, and entered by hand where no other source exists. Reducing that last category is ongoing.</p>
 
           <h4>What people use</h4>
           <p>Python ETL pipelines feed four Metabase dashboards, used by a twenty-person operations team for vessel tracking, shipment-level analytics, and daily trading reports.</p>
-          <p>Two of the dashboards are the core: one covering the company's own position, one covering the wider national market it competes in. The other two were built on external sources that have since become unavailable — which is its own lesson. A dashboard is only as durable as the data feeding it, and when you do not own the source, you are one policy change away from losing it. Anything built on external data now gets designed with that assumption.</p>
+          <p>Two of the dashboards are the core: one covering the company's own position, one covering the wider national market it competes in. The other two were built on external sources that have since become unavailable - which is its own lesson. A dashboard is only as durable as the data feeding it, and when you do not own the source, you are one policy change away from losing it. Anything built on external data now gets designed with that assumption.</p>
           <p><strong>I chose Metabase over Power BI or Superset for a reason that had nothing to do with features:</strong> the learning curve is short. I am the only data person here, and I will not always be. A tool that the next person can pick up without training is worth more to this company than one with a longer capability ceiling that leaves with me.</p>
 
           <h4>Defining what to measure</h4>
-          <p>Some of the most useful work was not technical. The company was operating with metrics that had never been formally defined — <strong>mean sales price, mean purchase price, and P&amp;L</strong> did not exist as agreed, computed numbers until they were specified and built.</p>
+          <p>Some of the most useful work was not technical. The company was operating with metrics that had never been formally defined - <strong>mean sales price, mean purchase price, and P&amp;L</strong> did not exist as agreed, computed numbers until they were specified and built.</p>
           <p>Naming a metric sounds trivial and is not. It forces the questions nobody had needed to answer: which trades count, at what point a price is fixed, how currency is handled when a contract spans several. Answering those turned informal understanding into something the whole team could reference.</p>
-          <p>A related example: leadership asked for "a platform where we can see all the invoices, contracts, and performance in one place." That is one sentence describing two different systems. I split it — the analytical half is a dashboard layer, the operational half is an ERP — and made the case that conflating them produces a tool that does neither job. The ERP is now under development.</p>
+          <p>A related example: leadership asked for "a platform where we can see all the invoices, contracts, and performance in one place." That is one sentence describing two different systems. I split it - the analytical half is a dashboard layer, the operational half is an ERP - and made the case that conflating them produces a tool that does neither job. The ERP is now under development.</p>
 
           <h4>Being the only one</h4>
           <p>The technical challenge of working alone is manageable. The part I miss is the other thing a team gives you: three people arguing toward a solution none of them would have reached individually. Working solo, you get your own first idea, and you have to be disciplined about interrogating it the way a colleague would.</p>
@@ -939,17 +1085,23 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
         </div>
       </details>
     </article>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ RESEARCH ============ -->
 <section class="sec" id="research">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Research</div>
-      <h2>Detecting cognitive load in EEG using heterogeneous graph neural networks</h2>
     </div>
-    <div class="prose reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="research">Detecting cognitive load in EEG using heterogeneous graph neural networks</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-research" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-research"><div class="sec-body-inner">    <div class="prose reveal d1">
       <p style="font-family:var(--mono);font-size:11.5px;color:var(--text-3);margin-bottom:26px">
         M.S. thesis, Tarbiat Modares University · Submitted to <em>Scientific Reports</em> ·
         <a href="https://zenodo.org/records/20593024" target="_blank" rel="noopener">Read the preprint →</a>
@@ -994,76 +1146,88 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
       <h4>Method</h4>
       <p>Two public datasets harmonised and pooled to force exposure to hardware and subject variation, segmented into 30-second hyper-windows. Two representations: a channel graph encoding inter-electrode connectivity, and a heterogeneous graph encoding the three relation types. Four graph architectures (GCN, GAT, RGCN, heterogeneous GAT) evaluated against an LSTM baseline plus convolutional, transformer, and classical baselines, under a strict subject-independent 5-fold protocol.</p>
       <h4>Results</h4>
-      <p>The heterogeneous RGCN performed best among the graph models — accuracy 0.760, ROC-AUC 0.836 — significantly outperforming the LSTM baseline. An edge-type ablation confirmed the three relation types contribute complementary information rather than redundant signal.</p>
+      <p>The heterogeneous RGCN performed best among the graph models - accuracy 0.760, ROC-AUC 0.836 - significantly outperforming the LSTM baseline. An edge-type ablation confirmed the three relation types contribute complementary information rather than redundant signal.</p>
     </div>
 
     <div class="callout reveal d1">
       <h4>The most interesting result</h4>
-      <p>A random forest on the same handcrafted features matched the RGCN on accuracy and beat it on ROC-AUC. That is the finding worth reporting: on this data, at this scale, the graph architecture did not earn its complexity. The relational structure is real, and the ablation shows the three edge types carry complementary information — but knowing exactly where a simpler model still wins is more useful than a result that only confirms what you hoped for.</p>
+      <p>A random forest on the same handcrafted features matched the RGCN on accuracy and beat it on ROC-AUC. That is the finding worth reporting: on this data, at this scale, the graph architecture did not earn its complexity. The relational structure is real, and the ablation shows the three edge types carry complementary information - but knowing exactly where a simpler model still wins is more useful than a result that only confirms what you hoped for.</p>
     </div>
 
     <div class="prose reveal d1">
       <h4>Fairness</h4>
-      <p>A sex-based subgroup analysis found comparable accuracy (male 0.761, female 0.716) but a true-positive-rate gap of 0.131 — a sizeable disparity in who the model actually detects, invisible if you only report accuracy. It is a small illustration of why recall-based fairness metrics matter.</p>
+      <p>A sex-based subgroup analysis found comparable accuracy (male 0.761, female 0.716) but a true-positive-rate gap of 0.131 - a sizeable disparity in who the model actually detects, invisible if you only report accuracy. It is a small illustration of why recall-based fairness metrics matter.</p>
     </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ EXPERIENCE ============ -->
 <section class="sec" id="experience">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Experience</div>
-      <h2>Where I have worked</h2>
     </div>
-    <div class="roles reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="experience">Where I have worked</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-experience" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-experience"><div class="sec-body-inner">    <div class="roles reveal d1">
       <div class="role-row">
         <div class="role-main">Data Scientist <span>· <a href="https://acer-trading.com/" target="_blank" rel="noopener">ACER Trading</a></span></div>
-        <div class="role-date">Jan 2026 — Present</div>
+        <div class="role-date">Jan 2026 - Present</div>
         <div class="role-desc">Built the entire data and analytics function solo: PostgreSQL data model, Python ETL, Metabase dashboards, metric definitions.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Data Scientist <span>· <a href="https://www.linkedin.com/company/snappfood/posts/?feedView=all" target="_blank" rel="noopener">Snappfood</a></span></div>
-        <div class="role-date">Feb 2025 — Jan 2026</div>
+        <div class="role-date">Feb 2025 - Jan 2026</div>
         <div class="role-desc">LLM voice analytics pipeline across four vendor complaint channels; geospatial coverage analysis across ~50,000 vendors in 120 cities.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Data Scientist <span>· <a href="https://www.linkedin.com/company/faratarhsteel/" target="_blank" rel="noopener">Faratrah Steel</a></span></div>
-        <div class="role-date">Mar 2024 — Feb 2025</div>
+        <div class="role-date">Mar 2024 - Feb 2025</div>
         <div class="role-desc">Commodity price forecasting and a customer credit-scoring system, both deployed and running on a recurring schedule.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Intern Data Scientist <span>· <a href="https://www.sheyda.com/" target="_blank" rel="noopener">Sheyda VOD</a></span></div>
-        <div class="role-date">Dec 2023 — Mar 2024</div>
+        <div class="role-date">Dec 2023 - Mar 2024</div>
         <div class="role-desc">Built a content recommendation system and chatbot, applying BERT and transformer models to content matching, integrated before public launch.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Data Science Instructor <span>· <a href="https://www.linkedin.com/school/karyar/" target="_blank" rel="noopener">Karyar College</a></span></div>
-        <div class="role-date">Apr 2023 — Nov 2023</div>
+        <div class="role-date">Apr 2023 - Nov 2023</div>
         <div class="role-desc">Designed and taught a hands-on curriculum: Python, exploratory analysis, and end-to-end ML workflows.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Software Developer <span>· <a href="https://www.linkedin.com/company/nasir-driving-simulator/" target="_blank" rel="noopener">Nasir Driving Simulator</a></span></div>
-        <div class="role-date">Feb 2022 — Mar 2023</div>
+        <div class="role-date">Feb 2022 - Mar 2023</div>
         <div class="role-desc">Built the TCP/UDP socket networking layer carrying real-time data between supervisor and trainee stations.</div>
       </div>
       <div class="role-row">
         <div class="role-main">Teaching Assistant <span>· <a href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University of Technology</a></span></div>
-        <div class="role-date">Oct 2020 — Jan 2022</div>
+        <div class="role-date">Oct 2020 - Jan 2022</div>
         <div class="role-desc">Teaching assistant for programming courses in Python, C++, and MATLAB.</div>
       </div>
     </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ SKILLS ============ -->
 <section class="sec" id="skills">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Skills</div>
-      <h2>What I would defend in an interview</h2>
     </div>
-    <div class="skills reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="skills">What I would defend in an interview</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-skills" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-skills"><div class="sec-body-inner">    <div class="skills reveal d1">
       <div class="skill-row"><div class="skill-cat">Languages</div><div class="skill-list">Python · SQL</div></div>
       <div class="skill-row"><div class="skill-cat">Data Engineering</div><div class="skill-list">PostgreSQL · MySQL · ETL · Schema Design</div></div>
       <div class="skill-row"><div class="skill-cat">Machine Learning</div><div class="skill-list">Scikit-learn · XGBoost · LightGBM · Random Forests · SVM · K-Means · DBSCAN · Logistic &amp; Linear Regression · ARIMA · PCA · SMOTE</div></div>
@@ -1074,43 +1238,55 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
       <div class="skill-row"><div class="skill-cat">Analytics</div><div class="skill-list">Metabase · Dashboard Design · KPI Definition · Stakeholder Reporting</div></div>
       <div class="skill-row learning"><div class="skill-cat">Currently learning</div><div class="skill-list">MLOps</div></div>
     </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ EDUCATION ============ -->
 <section class="sec" id="education">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Education</div>
-      <h2>Degrees</h2>
     </div>
-    <div class="edu reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="education">Degrees</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-education" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-education"><div class="sec-body-inner">    <div class="edu reveal d1">
       <div class="edu-item">
         <div class="edu-deg">M.S. Information Technology Engineering</div>
-        <div class="edu-meta">Tarbiat Modares University · 2023 — 2026</div>
+        <div class="edu-meta">Tarbiat Modares University · 2023 - 2026</div>
         <div class="edu-thesis">Detection of Cognitive Activities in EEG Signals Using Graph Neural Networks</div>
       </div>
       <div class="edu-item">
         <div class="edu-deg">B.S. Mechanical Engineering</div>
-        <div class="edu-meta"><a href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University of Technology</a> · 2018 — 2023</div>
+        <div class="edu-meta"><a href="https://www.linkedin.com/school/kntoosi/" target="_blank" rel="noopener">K.N. Toosi University of Technology</a> · 2018 - 2023</div>
         <div class="edu-thesis">Automated Femur Extraction from X-Ray Images Using Convolutional Neural Networks</div>
       </div>
       <p class="honours">
-        <strong>Selected honours</strong> — Top 1% of ~145,000 candidates, national undergraduate entrance examination (2018) · Top 2% of ~15,000 candidates, national graduate entrance examination (2023) · Full tuition scholarship across both degrees.<br>
-        <strong>Languages</strong> — English (IELTS 7.5) · Persian (native) · Kurdish (native).
+        <strong>Selected honours</strong> - Top 1% of ~145,000 candidates, national undergraduate entrance examination (2018) · Top 2% of ~15,000 candidates, national graduate entrance examination (2023) · Full tuition scholarship across both degrees.<br>
+        <strong>Languages</strong> - English (IELTS 7.5) · Persian (native) · Kurdish (native).
       </p>
     </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ CONTACT ============ -->
 <section class="sec" id="contact">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-top reveal">
       <div class="sec-label">Contact</div>
-      <h2>Open to Data Scientist roles in the EU</h2>
     </div>
-    <div class="contact-grid reveal d1">
+    <div class="sec-head">
+      <div class="head-row">
+        <h2><button class="sec-jump" data-target="contact">Open to Data Scientist roles in the EU</button></h2>
+        <button class="sec-fold" aria-expanded="true" aria-controls="body-contact" aria-label="Collapse or expand this section"><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      </div>
+    </div>
+    <div class="sec-body" id="body-contact"><div class="sec-body-inner">    <div class="contact-grid reveal d1">
       <div class="prose">
         <p>I require visa sponsorship and I am open to relocation within Europe.</p>
         <p>If you are hiring, or you just want to talk about LLM pipelines or graph neural networks, I would like to hear from you.</p>
@@ -1138,11 +1314,12 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
         <div class="sent" id="sentPanel" hidden>
           <div class="sent-tick" aria-hidden="true">&#10003;</div>
           <h4>Message sent</h4>
-          <p>Thanks — it has reached my inbox, and I will reply to the address you gave.</p>
+          <p>Thanks - it has reached my inbox, and I will reply to the address you gave.</p>
           <button class="send" type="button" id="sentOk">OK</button>
         </div>
       </div>
     </div>
+    </div></div>
   </div>
 </section>
 
@@ -1262,7 +1439,75 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
       if (r.top <= probe && r.bottom > probe) found = id;
     });
     activate(found);
+    updateMini();
   }
+
+  /* ---------- compact bar for the section you are inside ---------- */
+  var mini      = document.getElementById('minibar');
+  var miniTitle = document.getElementById('miniTitle');
+  var miniFold  = document.getElementById('miniFold');
+  var miniSec   = null;
+
+  function updateMini(){
+    var sec = current ? document.getElementById(current) : null;
+    var show = false;
+
+    if (sec){
+      var head = sec.querySelector('.sec-head');
+      if (head) show = head.getBoundingClientRect().bottom <= barPx + 2;
+    }
+
+    if (show){
+      if (miniSec !== sec){
+        miniSec = sec;
+        var t = sec.querySelector('.sec-jump');
+        miniTitle.textContent = t ? t.textContent : '';
+      }
+      mini.classList.toggle('folded', sec.classList.contains('collapsed'));
+      miniFold.setAttribute('aria-expanded', sec.classList.contains('collapsed') ? 'false' : 'true');
+      mini.classList.add('show');
+    } else {
+      mini.classList.remove('show');
+      miniSec = null;
+    }
+  }
+
+  /* folding from the compact bar happens while the section's real header is
+     off screen, so bring it back into view - otherwise you change something
+     you cannot see and lose your place */
+  /* scroll first, fold once it has landed. running both at once makes the
+     browser clamp the scroll against a document that is shrinking underneath
+     it, which is what the stutter was */
+  function scrollThenDo(sec, done){
+    var offBy = Math.abs(sec.getBoundingClientRect().top - (barPx + 8));
+    if (reduce || offBy < 8){ done(); return; }
+
+    var settled = false;
+    function finish(){
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      window.removeEventListener('scrollend', finish);
+      window.requestAnimationFrame(done);
+    }
+
+    var timer = window.setTimeout(finish, 640);
+    if ('onscrollend' in window) window.addEventListener('scrollend', finish);
+
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function foldFromBar(){
+    if (!miniSec) return;
+    var sec = miniSec;
+    scrollThenDo(sec, function(){
+      setOpen(sec, sec.classList.contains('collapsed'));
+      window.requestAnimationFrame(function(){ spy(); });
+    });
+  }
+
+  miniTitle.addEventListener('click', foldFromBar);
+  miniFold.addEventListener('click', foldFromBar);
 
   var ticking = false;
   function onScroll(){
@@ -1276,6 +1521,76 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 
   /* re-centre the strip if the viewport changes */
   window.addEventListener('resize', function(){ centreNav(links[current]); }, { passive: true });
+
+  /* ---------- keep --bar equal to the real top bar height ---------- */
+  var topbar = document.querySelector('.topbar');
+
+  var barPx = 62;
+
+  function setBar(){
+    if (!topbar) return;
+    var h = Math.round(topbar.getBoundingClientRect().height);
+    /* 1px overlap avoids a hairline seam from subpixel rounding */
+    barPx = h - 1;
+    document.documentElement.style.setProperty('--bar', barPx + 'px');
+  }
+
+  setBar();
+  window.addEventListener('resize', setBar, { passive: true });
+  window.addEventListener('orientationchange', setBar);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setBar);
+  if (window.ResizeObserver && topbar) new ResizeObserver(setBar).observe(topbar);
+
+  /* ---------- collapsible sections ---------- */
+  function setOpen(sec, open){
+    if (!sec) return;
+    sec.classList.toggle('collapsed', !open);
+    var btn = sec.querySelector('.sec-fold');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  /* the chevron always folds, wherever you are on the page */
+  document.querySelectorAll('.sec-fold').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sec = btn.closest('.sec');
+      setOpen(sec, sec.classList.contains('collapsed'));
+      window.requestAnimationFrame(spy);
+    });
+  });
+
+  /* the title folds too, same as the chevron */
+  document.querySelectorAll('.sec-jump').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sec = btn.closest('.sec');
+      setOpen(sec, sec.classList.contains('collapsed'));
+      window.requestAnimationFrame(spy);
+    });
+  });
+
+  /* open a section (if collapsed) and scroll to it */
+  function goTo(id){
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    var wasClosed = sec.classList.contains('collapsed');
+    if (wasClosed) setOpen(sec, true);
+    window.setTimeout(function(){
+      sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }, wasClosed ? 90 : 0);
+  }
+
+  document.getElementById('topnav').addEventListener('click', function(e){
+    var a = e.target.closest('a');
+    if (!a) return;
+    var id = (a.getAttribute('href') || '').replace('#','');
+    if (ids.indexOf(id) === -1) return;
+    e.preventDefault();
+    goTo(id);
+  });
+
+  /* ---------- guide graph: hover reveals, click navigates ---------- */
+  document.querySelectorAll('.cnode').forEach(function(g){
+    g.addEventListener('click', function(){ goTo(g.getAttribute('data-target')); });
+  });
 
   /* ---------- contact form: submit in place, no page change ---------- */
   var form = document.getElementById('contactForm');
