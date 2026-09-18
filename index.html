@@ -92,7 +92,7 @@
   --ui:'Quicksand',system-ui,sans-serif;
   --body:'Newsreader',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
-  --measure:60ch;
+  --measure:72ch;
   --bar:62px;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
@@ -226,7 +226,7 @@ a.case-org:hover{border-bottom-color:var(--accent)}
 /* ============================================================
    SHELL
    ============================================================ */
-.wrap{max-width:1120px;margin:0 auto;padding:0 30px;position:relative;z-index:2}
+.wrap{max-width:1200px;margin:0 auto;padding:0 30px;position:relative;z-index:2}
 
 /* ============================================================
    HERO
@@ -264,8 +264,9 @@ h1{
   display:flex;align-items:center;justify-content:center;gap:9px;
   padding-left:12px;padding-right:12px
 }
-.bi{display:grid;place-items:center;flex-shrink:0;width:18px;height:18px}
-.bi svg{width:100%;height:100%}
+.bi{display:grid;place-items:center;flex-shrink:0;width:18px;height:18px;
+    transform:translateY(-1px)}
+.bi svg{width:100%;height:100%;display:block}
 @media(max-width:420px){.hero-links{grid-template-columns:1fr;max-width:none}}
 
 .btn{
@@ -343,7 +344,7 @@ h1{
 .minibar.show{opacity:1;transform:none;pointer-events:auto}
 .minibar-inner{
   display:flex;align-items:center;justify-content:space-between;gap:20px;
-  max-width:1120px;margin:0 auto;padding:10px 30px
+  max-width:1200px;margin:0 auto;padding:10px 30px
 }
 .mini-title{
   font-family:var(--display);font-weight:700;letter-spacing:-.015em;
@@ -375,7 +376,8 @@ h4{
 .prose p{
   margin-bottom:19px;color:var(--text-2);
   text-align:justify;text-justify:inter-word;
-  hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word
+  hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word;
+  hyphenate-limit-chars:8 4 4;-webkit-hyphenate-limit-chars:8 4 4
 }
 .prose li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
 /* short or structural lines read worse justified */
@@ -588,7 +590,7 @@ button.send:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:
 /* about: labelled lead paragraphs */
 .lead-para{position:relative;padding-left:40px}
 .lead-ico{
-  position:absolute;left:0;top:.28em;
+  position:absolute;left:0;top:.06em;
   display:grid;place-items:center;width:27px;height:27px;
   border-radius:6px;color:var(--accent);
   background:color-mix(in srgb, var(--accent) 13%, transparent);
@@ -674,7 +676,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:9
 .foot-inner p,.foot-inner a{font-family:var(--ui);font-weight:500;font-size:14.5px;letter-spacing:.03em;color:var(--text-3)}
 .foot-links{display:flex;flex-wrap:wrap;gap:22px}
 .foot-links a{display:inline-flex;align-items:center;gap:7px}
-.foot-links .bi{width:15px;height:15px}
+.foot-links .bi{width:15px;height:15px;transform:translateY(-0.5px)}
 .foot-links a{transition:color .3s var(--ease)}
 .foot-links a:hover{color:var(--accent)}
 </style>
