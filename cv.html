@@ -464,8 +464,8 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
 
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="mark" href="./">Amin <b>Hosseinniya</b></a>
-    <a class="back" href="./" aria-label="Back to site"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span><span>Back to site</span></a>
+    <a class="mark" href="./" data-home>Amin <b>Hosseinniya</b></a>
+    <a class="back" href="./" data-home aria-label="Back to site"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span><span>Back to site</span></a>
     <button class="theme-btn" id="themeBtn" aria-label="Switch colour theme">
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <circle cx="12" cy="12" r="4.2"/>
@@ -527,7 +527,7 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
   <div class="modal-head">
     <div>
       <h2 id="contactTitle">Get in touch</h2>
-      <p>Hiring, or want to talk about LLM pipelines or graph neural networks? Leave a message and I will reply by email.</p>
+      <p id="contactIntro">Hiring, or want to talk about LLM pipelines or graph neural networks? Leave a message and I will reply by email.</p>
     </div>
     <button class="modal-x" type="button" id="contactClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
@@ -564,7 +564,7 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
 <footer>
   <div class="wrap foot">
     <span>&copy; Amin Hosseinniya</span>
-    <a href="./">aminhosseinniya.com</a>
+    <a href="./" data-home>aminhosseinniya.com</a>
   </div>
 </footer>
 
@@ -584,6 +584,24 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
     setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
   });
 
+  /* ---------- back to the site ----------
+     The CV buttons on the main page open this page in a new tab, so the site
+     is usually still open in the tab behind it: close this one to return
+     there. Arriving any other way (shared link, typed URL), there is no such
+     tab, so the link simply opens the site here. */
+  var fromSite = false;
+  try { fromSite = history.length === 1 && new URL(document.referrer).origin === location.origin; } catch (e) {}
+  if (fromSite) {
+    document.querySelectorAll('a[data-home]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;   /* let "open in new tab" work */
+        e.preventDefault();
+        window.close();
+        setTimeout(function(){ location.href = a.href; }, 150);              /* if the browser refused */
+      });
+    });
+  }
+
   /* ---------- download feedback ---------- */
   var timer;
   function flashDone(){
@@ -601,8 +619,10 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
   var sent = document.getElementById('sentPanel');
   var msg  = document.getElementById('formMsg');
 
+  var intro = document.getElementById('contactIntro');
+
   function resetForm(){
-    form.reset(); sent.hidden = true; form.hidden = false;
+    form.reset(); sent.hidden = true; form.hidden = false; intro.hidden = false;
     msg.textContent = ''; msg.classList.remove('err');
   }
 
@@ -632,7 +652,7 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
         headers: { 'Accept': 'application/json' }
       })
       .then(function(r){
-        if (r.ok) { form.hidden = true; sent.hidden = false; document.getElementById('sentOk').focus(); return; }
+        if (r.ok) { form.hidden = true; intro.hidden = true; sent.hidden = false; document.getElementById('sentOk').focus(); return; }
         return r.json().then(function(data){
           var m = data && data.errors
             ? data.errors.map(function(x){ return x.message; }).join(', ')
