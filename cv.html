@@ -585,21 +585,25 @@ footer{margin-top:auto;border-top:1px solid var(--line)}
   });
 
   /* ---------- back to the site ----------
-     The CV buttons on the main page open this page in a new tab, so the site
-     is usually still open in the tab behind it: close this one to return
-     there. Arriving any other way (shared link, typed URL), there is no such
-     tab, so the link simply opens the site here. */
-  var fromSite = false;
-  try { fromSite = history.length === 1 && new URL(document.referrer).origin === location.origin; } catch (e) {}
+     Came here from the site in this tab: step back in history, which returns
+     to the exact spot on the page they left. Otherwise (shared link, typed
+     URL, new tab) the link just opens the site normally. */
+  var fromSite = false, backTimer;
+  try {
+    var ref = new URL(document.referrer);
+    fromSite = ref.origin === location.origin && ref.pathname !== location.pathname && history.length > 1;
+  } catch (e) {}
   if (fromSite) {
     document.querySelectorAll('a[data-home]').forEach(function(a){
       a.addEventListener('click', function(e){
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;   /* let "open in new tab" work */
         e.preventDefault();
-        window.close();
-        setTimeout(function(){ location.href = a.href; }, 150);              /* if the browser refused */
+        history.back();
+        backTimer = setTimeout(function(){ location.href = a.href; }, 400);  /* if there was nothing to go back to */
       });
     });
+    /* page left (or kept in the back/forward cache): never let the fallback fire later */
+    window.addEventListener('pagehide', function(){ clearTimeout(backTimer); });
   }
 
   /* ---------- download feedback ---------- */
