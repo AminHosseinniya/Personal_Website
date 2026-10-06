@@ -297,7 +297,7 @@ h1{
    ============================================================ */
 .stage{position:relative;padding:0 0 90px}
 .stage::before{                   /* halo behind the sheet */
-  content:"";position:absolute;left:50%;top:40px;width:min(1100px,120%);height:70%;
+  content:"";position:absolute;left:50%;top:40px;width:min(1100px,100vw);height:70%;
   transform:translateX(-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,var(--halo),transparent);filter:blur(10px)
 }
