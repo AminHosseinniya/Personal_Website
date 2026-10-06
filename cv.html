@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV | Amin Hosseinniya</title>
+<meta name="description" content="Curriculum vitae of Amin Hosseinniya, AI Engineer and Data Scientist. View it online or download the PDF.">
+<meta name="theme-color" content="#08181F">
+<link rel="canonical" href="https://aminhosseinniya.com/cv">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://aminhosseinniya.com/cv">
+<meta property="og:title" content="CV | Amin Hosseinniya">
+<meta property="og:description" content="Curriculum vitae of Amin Hosseinniya, AI Engineer and Data Scientist.">
+<meta property="og:image" content="https://aminhosseinniya.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="amin-hosseinniya-cv.pdf" as="fetch" type="application/pdf" crossorigin>
+<link rel="modulepreload" href="assets/vendor/pdfjs/pdf.min.js">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+
+<style>
+/* ============================================================
+   FACES
+   ============================================================ */
+@font-face{
+  font-family:'Louis George Cafe';
+  src:url('assets/fonts/LouisGeorgeCafe-Bold.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'Quicksand';
+  src:url('assets/fonts/Quicksand-Book.woff2') format('woff2');
+  font-weight:400 500;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'Quicksand';
+  src:url('assets/fonts/Quicksand-Bold.woff2') format('woff2');
+  font-weight:600 700;font-style:normal;font-display:swap
+}
+@font-face{
+  font-family:'JetBrains Mono';
+  src:url('assets/fonts/JetBrainsMono-latin.woff2') format('woff2');
+  font-weight:400 800;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
+/* ============================================================
+   THEME TOKENS (same palette as the main page)
+   ============================================================ */
+:root[data-theme="dark"]{
+  --bg:#08181F;
+  --bg-2:#0D2129;
+  --bg-3:#112B35;
+  --line:#1C3E4A;
+  --line-2:#2A5A6B;
+  --text:#E8F1F3;
+  --text-2:#9BB4BE;
+  --text-3:#6E8B97;
+  --accent:#4FB3CE;
+  --accent-2:#2C7D93;
+  --accent-glow:rgba(79,179,206,.35);
+  --brass:#D4A93C;
+  --paper-shadow:0 30px 80px rgba(0,0,0,.55),0 8px 24px rgba(0,0,0,.35);
+  --halo:rgba(79,179,206,.16);
+}
+:root[data-theme="light"]{
+  --bg:#F4F8F9;
+  --bg-2:#FFFFFF;
+  --bg-3:#FFFFFF;
+  --line:#DCE7EB;
+  --line-2:#BACED6;
+  --text:#0C232C;
+  --text-2:#54707B;
+  --text-3:#7B959F;
+  --accent:#1F4E5F;
+  --accent-2:#3D7E92;
+  --accent-glow:rgba(31,78,95,.22);
+  --brass:#A8802C;
+  --paper-shadow:0 26px 70px rgba(15,42,51,.16),0 6px 18px rgba(15,42,51,.08);
+  --halo:rgba(61,126,146,.14);
+}
+:root{
+  --display:'Louis George Cafe',system-ui,sans-serif;
+  --ui:'Quicksand',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--ui);font-size:17px;line-height:1.6;
+  color:var(--text);background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column
+}
+a{color:var(--accent);text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 30px;width:100%}
+@media(max-width:600px){.wrap{padding:0 16px}}
+.bi{display:grid;place-items:center;flex-shrink:0;width:18px;height:18px}
+.bi svg{width:100%;height:100%;display:block}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid var(--line);
+  transition:background .45s var(--ease),border-color .45s var(--ease)
+}
+.topbar-inner{display:flex;align-items:center;gap:14px;height:62px}
+.mark{
+  font-weight:600;font-size:17.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text);white-space:nowrap;transition:opacity .3s var(--ease)
+}
+.mark b{color:var(--accent);font-weight:700}
+.mark:hover{opacity:.72}
+.back{
+  margin-left:auto;display:inline-flex;align-items:center;gap:8px;
+  font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+  padding:8px 12px;border-radius:4px;transition:color .3s var(--ease),background .3s var(--ease)
+}
+.back .bi{width:16px;height:16px;transition:transform .3s var(--ease)}
+.back:hover{color:var(--accent);background:color-mix(in srgb, var(--accent) 10%, transparent)}
+.back:hover .bi{transform:translateX(-3px)}
+.theme-btn{
+  flex-shrink:0;display:grid;place-items:center;width:34px;height:34px;cursor:pointer;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:4px;color:var(--text-2);
+  transition:color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)
+}
+.theme-btn:hover{color:var(--accent);border-color:var(--accent-2);transform:translateY(-1px)}
+.theme-btn svg{width:16px;height:16px}
+:root[data-theme="dark"] .icon-moon,:root[data-theme="light"] .icon-sun{display:none}
+@media(max-width:600px){.mark{font-size:13px}.back span:not(.bi){display:none}}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.head{
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:28px 40px;
+  padding:64px 0 44px
+}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:13.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)
+}
+.eyebrow::before{content:"";width:28px;height:1.5px;background:currentColor}
+h1{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.02;
+  font-size:clamp(2.6rem,6vw,4.4rem);margin:18px 0 14px
+}
+.role{font-family:var(--mono);font-size:15px;letter-spacing:.04em;color:var(--text-2)}
+.facts{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;list-style:none
+}
+.facts li{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-3);padding:5px 10px;border:1px solid var(--line);border-radius:999px;
+  background:color-mix(in srgb, var(--bg-2) 70%, transparent)
+}
+.facts li:empty{display:none}
+
+.actions{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-width:300px}
+.subactions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-weight:600;font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 14px;border-radius:8px;border:1px solid var(--line-2);color:var(--text-2);background:var(--bg-2);
+  transition:transform .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease),box-shadow .28s var(--ease)
+}
+.ghost .bi{width:16px;height:16px}
+.ghost:hover{transform:translateY(-2px);color:var(--accent);border-color:var(--accent-2);box-shadow:0 6px 20px var(--accent-glow)}
+
+@media(max-width:820px){
+  .head{grid-template-columns:1fr;padding:40px 0 32px}
+  .actions{min-width:0}
+}
+
+/* ============================================================
+   THE DOWNLOAD BUTTON
+   ============================================================ */
+.dl{
+  --c1:var(--accent);--c2:var(--accent-2);
+  position:relative;isolation:isolate;overflow:hidden;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px 14px 14px;border-radius:14px;
+  color:var(--bg);
+  background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 10px 30px var(--accent-glow),0 2px 6px rgba(0,0,0,.18);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),filter .35s var(--ease)
+}
+:root[data-theme="light"] .dl{color:#fff}
+.dl::before{                      /* soft moving sheen */
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.38) 48%,transparent 66%);
+  transform:translateX(-120%);transition:transform .9s var(--ease)
+}
+.dl::after{                       /* breathing glow ring */
+  content:"";position:absolute;inset:-2px;z-index:-2;border-radius:16px;
+  box-shadow:0 0 0 0 var(--accent-glow);animation:pulse 2.8s var(--ease) infinite
+}
+.dl:hover{transform:translateY(-3px);filter:brightness(1.07);
+  box-shadow:0 1px 0 rgba(255,255,255,.3) inset,0 18px 44px var(--accent-glow),0 3px 10px rgba(0,0,0,.2)}
+.dl:hover::before{transform:translateX(120%)}
+.dl:active{transform:translateY(-1px) scale(.99)}
+.dl-icon{
+  position:relative;flex-shrink:0;width:52px;height:52px;border-radius:11px;overflow:hidden;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.18);box-shadow:0 0 0 1px rgba(255,255,255,.22) inset
+}
+.dl-icon svg{width:26px;height:26px;position:absolute;transition:opacity .3s var(--ease),transform .45s var(--ease)}
+.dl-arrow{animation:none}
+.dl:hover .dl-arrow{animation:drop 1.1s var(--ease) infinite}
+.dl-check{opacity:0;transform:scale(.4) rotate(-20deg)}
+.dl.done .dl-arrow{opacity:0;transform:translateY(16px);animation:none}
+.dl.done .dl-check{opacity:1;transform:none}
+.dl-text{display:flex;flex-direction:column;line-height:1.2;text-align:left}
+.dl-label{font-weight:700;font-size:18px;letter-spacing:.07em;text-transform:uppercase}
+.dl-sub{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;opacity:.82;margin-top:5px}
+@keyframes drop{
+  0%{transform:translateY(0);opacity:1}
+  45%{transform:translateY(14px);opacity:0}
+  46%{transform:translateY(-14px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 var(--accent-glow)}
+  70%{box-shadow:0 0 0 12px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+
+/* floating copy that appears once the main button scrolls away */
+.fab{
+  position:fixed;right:22px;bottom:22px;z-index:90;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px 12px 14px;border-radius:999px;
+  font-weight:700;font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 12px 34px var(--accent-glow),0 3px 10px rgba(0,0,0,.25);
+  opacity:0;transform:translateY(24px) scale(.96);pointer-events:none;
+  transition:opacity .35s var(--ease),transform .35s var(--ease),filter .3s var(--ease)
+}
+:root[data-theme="light"] .fab{color:#fff}
+.fab .bi{width:20px;height:20px}
+.fab.show{opacity:1;transform:none;pointer-events:auto}
+.fab:hover{filter:brightness(1.08)}
+@media(max-width:600px){.fab{left:16px;right:16px;bottom:16px;justify-content:center}}
+
+/* ============================================================
+   THE PAPER
+   ============================================================ */
+.stage{position:relative;padding:0 0 90px}
+.stage::before{                   /* halo behind the sheet */
+  content:"";position:absolute;left:50%;top:40px;width:min(1100px,120%);height:70%;
+  transform:translateX(-50%);z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,var(--halo),transparent);filter:blur(10px)
+}
+.sheets{display:flex;flex-direction:column;gap:28px;max-width:880px;margin:0 auto}
+.sheet{
+  position:relative;width:100%;aspect-ratio:var(--ratio,595.3/841.9);
+  background:#fff;border-radius:6px;overflow:hidden;
+  box-shadow:var(--paper-shadow);
+  outline:1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  animation:rise .8s var(--ease) both
+}
+.sheet canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sheet .links a{position:absolute;z-index:3;border-radius:2px;transition:background .25s var(--ease)}
+.sheet .links a:hover{background:rgba(31,111,138,.14)}
+.sheet .links a:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* loading skeleton */
+.skeleton{position:absolute;inset:0;padding:7% 8%;display:flex;flex-direction:column;gap:2.2%;transition:opacity .4s var(--ease)}
+.skeleton i{
+  display:block;height:1.35%;border-radius:3px;
+  background:linear-gradient(90deg,#edf1f3 0%,#f7f9fa 40%,#edf1f3 80%);background-size:300% 100%;
+  animation:shimmer 1.4s linear infinite
+}
+.skeleton i.h{height:3.2%;width:46%;margin-bottom:1.5%}
+.skeleton i.s{width:62%}
+.skeleton i.gap{background:none;animation:none;height:1.4%}
+.ready .skeleton{opacity:0;pointer-events:none}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-200% 0}}
+
+/* pdf.js text layer (selection + screen readers), flattened from pdf_viewer.css */
+.textLayer{
+  color-scheme:only light;position:absolute;text-align:initial;inset:0;overflow:clip;opacity:1;
+  line-height:1;letter-spacing:normal;word-spacing:normal;text-size-adjust:none;-webkit-text-size-adjust:none;
+  forced-color-adjust:none;transform-origin:0 0;caret-color:CanvasText;z-index:2;
+  --min-font-size:1;
+  --text-scale-factor:calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv:calc(1 / var(--min-font-size))
+}
+.textLayer :is(span,br){color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0% 0%;user-select:text;-webkit-user-select:text}
+.textLayer > :not(.markedContent),
+.textLayer .markedContent span:not(.markedContent){
+  z-index:1;--font-height:0;font-size:calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x:1;--rotate:0deg;transform:rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv))
+}
+.textLayer .markedContent{display:contents}
+.textLayer ::selection{background:rgba(31,111,138,.28);color:transparent}
+.textLayer br::selection{background:transparent}
+.textLayer .endOfContent{display:block;position:absolute;inset:100% 0 0;z-index:0;cursor:default;user-select:none}
+
+/* fallback when the preview cannot render */
+.fallback{
+  max-width:620px;margin:0 auto;text-align:center;padding:48px 28px;border:1px dashed var(--line-2);border-radius:12px;
+  color:var(--text-2);background:color-mix(in srgb, var(--bg-2) 70%, transparent)
+}
+.fallback strong{display:block;font-family:var(--display);font-size:1.5rem;color:var(--text);margin-bottom:8px}
+.fallback a{font-weight:700}
+
+footer{margin-top:auto;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;padding-bottom:22px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--text-3)}
+.foot a{color:var(--text-2)}
+.foot a:hover{color:var(--accent)}
+@media(max-width:600px){.foot{padding-bottom:90px}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+@media print{
+  .topbar,.head .actions,.fab,footer{display:none}
+  .sheet{box-shadow:none;outline:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="mark" href="./">Amin <b>Hosseinniya</b></a>
+    <a class="back" href="./" aria-label="Back to site"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></span><span>Back to site</span></a>
+    <button class="theme-btn" id="themeBtn" aria-label="Switch colour theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4.2"/>
+        <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="head">
+    <div>
+      <p class="eyebrow">Curriculum vitae</p>
+      <h1>Amin Hosseinniya</h1>
+      <p class="role">AI Engineer &amp; Data Scientist</p>
+      <ul class="facts" aria-label="About this document">
+        <li id="factDate"></li>
+        <li id="factPages"></li>
+        <li>PDF</li>
+        <li id="factSize"></li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <a class="dl" id="dl" href="amin-hosseinniya-cv.pdf" download="CV - Amin Hosseinniya.pdf">
+        <span class="dl-icon" aria-hidden="true">
+          <svg class="dl-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10.5l5 5 5-5"/></svg>
+          <svg class="dl-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <span class="dl-text">
+          <span class="dl-label" id="dlLabel">Download CV</span>
+          <span class="dl-sub" id="dlSub">CV - Amin Hosseinniya.pdf</span>
+        </span>
+      </a>
+      <div class="subactions">
+        <a class="ghost" href="amin-hosseinniya-cv.pdf" target="_blank" rel="noopener"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></svg></span>Open PDF</a>
+        <a class="ghost" href="mailto:AminHosseinniya@gmail.com"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.4"/><path d="M3.4 6.6L12 13l8.6-6.4"/></svg></span>Email me</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" aria-label="CV preview">
+    <div class="sheets" id="sheets">
+      <div class="sheet" aria-hidden="true">
+        <div class="skeleton"><i class="h"></i><i class="s"></i><i></i><i class="gap"></i><i></i><i></i><i class="s"></i><i class="gap"></i><i></i><i></i><i></i><i class="s"></i><i class="gap"></i><i></i><i></i><i class="s"></i></div>
+      </div>
+    </div>
+    <noscript>
+      <div class="fallback"><strong>Preview needs JavaScript</strong>
+        You can still <a href="amin-hosseinniya-cv.pdf" download="CV - Amin Hosseinniya.pdf">download the CV</a> or <a href="amin-hosseinniya-cv.pdf">open the PDF</a>.</div>
+    </noscript>
+  </section>
+</main>
+
+<a class="fab" id="fab" href="amin-hosseinniya-cv.pdf" download="CV - Amin Hosseinniya.pdf" tabindex="-1" aria-hidden="true">
+  <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10.5l5 5 5-5"/><path d="M5 19.5h14"/></svg></span>Download CV
+</a>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; Amin Hosseinniya</span>
+    <a href="./">aminhosseinniya.com</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  /* ---------- theme: dark by default, remember a manual choice ---------- */
+  var root = document.documentElement;
+  function setTheme(t, save){
+    root.setAttribute('data-theme', t);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#08181F' : '#F4F8F9');
+    if (save) { try { localStorage.setItem('theme', t); } catch (e) {} }
+  }
+  setTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  });
+
+  /* ---------- download feedback ---------- */
+  var timer;
+  function flashDone(){
+    var dl = document.getElementById('dl'), label = document.getElementById('dlLabel');
+    dl.classList.add('done'); label.textContent = 'Downloading';
+    clearTimeout(timer);
+    timer = setTimeout(function(){ dl.classList.remove('done'); label.textContent = 'Download CV'; }, 2600);
+  }
+  document.getElementById('dl').addEventListener('click', flashDone);
+  document.getElementById('fab').addEventListener('click', flashDone);
+
+  /* ---------- floating button once the main one scrolls away ---------- */
+  var fab = document.getElementById('fab');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      var away = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+      fab.classList.toggle('show', away);
+      fab.setAttribute('aria-hidden', away ? 'false' : 'true');
+      fab.tabIndex = away ? 0 : -1;
+    }, { rootMargin: '-62px 0px 0px 0px' }).observe(document.getElementById('dl'));   /* 62px = top bar */
+  }
+})();
+</script>
+
+<script nomodule>
+  document.getElementById('sheets').innerHTML = '<div class="fallback"><strong>Preview unavailable in this browser</strong>Use the download button above, or <a href="amin-hosseinniya-cv.pdf">open the PDF</a>.</div>';
+</script>
+
+<script type="module">
+const CV = 'amin-hosseinniya-cv.pdf';
+const sheets = document.getElementById('sheets');
+
+function fallback(err) {
+  console.error('CV preview failed:', err);
+  sheets.innerHTML = '<div class="fallback"><strong>The preview could not load</strong>' +
+    'Use the download button above, or <a href="' + CV + '" target="_blank" rel="noopener">open the PDF</a> in a new tab.</div>';
+}
+
+function kb(bytes) {
+  return bytes >= 1048576 ? (bytes / 1048576).toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB';
+}
+
+try {
+  const pdfjs = await import('./assets/vendor/pdfjs/pdf.min.js');
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL('assets/vendor/pdfjs/pdf.worker.min.js', document.baseURI).href;
+  const doc = await pdfjs.getDocument({ url: CV, isEvalSupported: false }).promise;
+
+  /* facts row and button caption, read from the file itself */
+  const n = doc.numPages;
+  document.getElementById('factPages').textContent = n + (n === 1 ? ' page' : ' pages');
+  doc.getDownloadInfo().then(({ length }) => {
+    document.getElementById('factSize').textContent = kb(length);
+    document.getElementById('dlSub').textContent = 'PDF · ' + kb(length);
+  });
+  doc.getMetadata().then(({ info }) => {
+    const d = pdfjs.PDFDateString.toDateObject(info.ModDate || info.CreationDate || '');
+    if (d) document.getElementById('factDate').textContent =
+      'Updated ' + d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  }).catch(() => {});
+
+  /* one sheet per page; the first reuses the skeleton placeholder */
+  const pages = [];
+  const first = sheets.querySelector('.sheet');
+  for (let i = 1; i <= n; i++) {
+    const page = await doc.getPage(i);
+    const base = page.getViewport({ scale: 1 });
+    const el = i === 1 ? first : first.cloneNode(true);
+    el.removeAttribute('aria-hidden');
+    el.setAttribute('role', 'document');
+    el.setAttribute('aria-label', 'CV page ' + i + ' of ' + n);
+    el.style.setProperty('--ratio', base.width + '/' + base.height);
+    if (i > 1) sheets.appendChild(el);
+    const canvas = document.createElement('canvas');
+    canvas.setAttribute('aria-hidden', 'true');
+    const text = document.createElement('div'); text.className = 'textLayer';
+    const links = document.createElement('div'); links.className = 'links';
+    el.prepend(canvas); el.append(text, links);
+    const annots = (await page.getAnnotations()).filter(a => a.subtype === 'Link' && a.url);
+    pages.push({ page, base, el, canvas, text, links, annots, width: 0, task: null });
+  }
+
+  async function draw(p) {
+    const w = p.el.clientWidth;
+    if (!w || w === p.width) return;
+    p.width = w;
+    if (p.task) p.task.cancel();
+    const scale = w / p.base.width;
+    const viewport = p.page.getViewport({ scale });
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    const off = document.createElement('canvas');          /* render off-screen, swap when done: no flicker */
+    off.width = Math.floor(viewport.width * dpr);
+    off.height = Math.floor(viewport.height * dpr);
+    p.task = p.page.render({ canvas: off, viewport, transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null });
+    try { await p.task.promise; } catch (e) { if (e && e.name === 'RenderingCancelledException') return; throw e; }
+    p.task = null;
+    p.canvas.width = off.width; p.canvas.height = off.height;
+    p.canvas.getContext('2d').drawImage(off, 0, 0);
+
+    p.text.replaceChildren();
+    p.text.style.setProperty('--total-scale-factor', scale);
+    await new pdfjs.TextLayer({ textContentSource: p.page.streamTextContent(), container: p.text, viewport }).render();
+
+    p.links.replaceChildren(...p.annots.map(a => {
+      const [x1, y1] = viewport.convertToViewportPoint(a.rect[0], a.rect[1]);
+      const [x2, y2] = viewport.convertToViewportPoint(a.rect[2], a.rect[3]);
+      const link = document.createElement('a');
+      link.href = a.url; link.target = '_blank'; link.rel = 'noopener';
+      link.setAttribute('aria-label', a.url);
+      Object.assign(link.style, {
+        left: Math.min(x1, x2) + 'px', top: Math.min(y1, y2) + 'px',
+        width: Math.abs(x2 - x1) + 'px', height: Math.abs(y2 - y1) + 'px'
+      });
+      return link;
+    }));
+    p.el.classList.add('ready');
+  }
+
+  const drawAll = () => Promise.all(pages.map(draw));
+  await drawAll();
+  let t;
+  new ResizeObserver(() => { clearTimeout(t); t = setTimeout(() => drawAll().catch(fallback), 120); }).observe(sheets);
+} catch (err) {
+  fallback(err);
+}
+</script>
+</body>
+</html>
